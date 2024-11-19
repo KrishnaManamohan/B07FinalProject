@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <!-- Logo Image -->
+    <ImageView
+        android:id="@+id/loginImageView"
+        android:layout_width="309dp"
+        android:layout_height="134dp"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/planetzelogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.201" />
+
+    <!-- Login Button (Initially Visible) -->
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="142dp"
+        android:layout_height="69dp"
+        android:layout_marginBottom="304dp"
+        android:backgroundTint="#A9BCD0"
+        android:text="@string/login"
+        app:iconTint="#00A9BC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginImageView"
+        app:layout_constraintVertical_bias="0.576" />
+
+    <!-- Signup Button (Initially Visible) -->
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="142dp"
+        android:layout_height="69dp"
+        android:backgroundTint="#A9BCD0"
+        android:text="@string/sign_up"
+        app:iconTint="#00A9BC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <!-- Login Form (Initially Hidden) -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
