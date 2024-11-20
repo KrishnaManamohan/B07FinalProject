@@ -4,39 +4,41 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.widget.Toast;
-import android.widget.Toast;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import java.util.HashMap;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class CreateUserActivity extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText;
     private Button loginButton;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_create_user);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
-
         loginButton = findViewById(R.id.LoginButton);
+
         loginButton.setOnClickListener(v -> validateLogin());
 
         findViewById(R.id.backButton).setOnClickListener(v -> {
@@ -54,29 +56,47 @@ public class CreateUserActivity extends AppCompatActivity {
             return;
         }
 
-        String userId = username.replace(".", "_");
+        if (password.length() < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters long",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("users");
-
-        HashMap<String, String> userData = new HashMap<>();
-        userData.put("username", username);
-        userData.put("password", password);
-
-        usersRef.child(userId).setValue(userData)
+        firebaseAuth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "User registered successfully!", Toast.LENGTH_SHORT).show();
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                        Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        if (user != null) {
+                            sendEmailVerification(user);
+                        }
                     } else {
                         if (task.getException() != null) {
-                            Toast.makeText(this, "Failed to register user: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Failed to create account: " +
+                                    task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(this, "Failed to register user due to an unknown error.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this,
+                                    "Failed to create account due to an unknown error.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+    }
+
+    private void sendEmailVerification(FirebaseUser user) {
+        user.sendEmailVerification().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(this, "Verification email sent. " +
+                        "Please check your inbox.", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(CreateUserActivity.this,
+                        LoginActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Failed to send verification email.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
