@@ -10,6 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.widget.Toast;
+import android.widget.Toast;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.HashMap;
+
 
 public class CreateUserActivity extends AppCompatActivity {
 
@@ -40,12 +46,37 @@ public class CreateUserActivity extends AppCompatActivity {
     }
 
     private void validateLogin() {
-
         String username = usernameEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
-        //enter code to validate users, api call to firebase?
 
-        //after a valid user is created, send user to an acitvity where they do the questions...
-        //... for new users
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please fill in both fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String userId = username.replace(".", "_");
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("users");
+
+        HashMap<String, String> userData = new HashMap<>();
+        userData.put("username", username);
+        userData.put("password", password);
+
+        usersRef.child(userId).setValue(userData)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "User registered successfully!", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        if (task.getException() != null) {
+                            Toast.makeText(this, "Failed to register user: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Failed to register user due to an unknown error.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
