@@ -45,6 +45,11 @@ public class UserPassEntryActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        findViewById(R.id.forgotPasswordButton).setOnClickListener(v -> {
+            Intent intent = new Intent(UserPassEntryActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     private void validateLogin() {

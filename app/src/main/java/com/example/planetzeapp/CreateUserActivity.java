@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class CreateUserActivity extends AppCompatActivity {
 
-    private EditText usernameEditText, passwordEditText;
+    private EditText usernameEditText, passwordEditText, usersFirstName, usersLastName;
     private Button loginButton;
     private FirebaseAuth firebaseAuth;
 
@@ -38,6 +38,8 @@ public class CreateUserActivity extends AppCompatActivity {
         // Bind UI elements
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+        usersFirstName =findViewById(R.id.userFirstName);
+        usersLastName = findViewById(R.id.userLastName);
         loginButton = findViewById(R.id.LoginButton);
 
         // Set button listener
@@ -53,6 +55,8 @@ public class CreateUserActivity extends AppCompatActivity {
     private void validateLogin() {
         String username = usernameEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
+        String firstName = usersFirstName.getText().toString().trim();
+        String lastName = usersLastName.getText().toString().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in both fields", Toast.LENGTH_SHORT).show();

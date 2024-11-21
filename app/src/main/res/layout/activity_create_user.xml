@@ -20,19 +20,21 @@
         app:layout_constraintVertical_bias="0.201" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="411dp"
-        android:layout_height="451dp"
+        android:layout_width="409dp"
+        android:layout_height="478dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginImageView">
+        app:layout_constraintTop_toBottomOf="@+id/loginImageView"
+        app:layout_constraintVertical_bias="0.0">
 
         <Button
             android:id="@+id/backButton"
             android:layout_width="192dp"
             android:layout_height="50dp"
             android:layout_marginStart="108dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#A9BCD0"
             android:text="Back"
             app:iconTint="#00A9BC"
@@ -44,36 +46,72 @@
             android:layout_width="232dp"
             android:layout_height="52dp"
             android:layout_marginStart="88dp"
-            android:layout_marginTop="36dp"
-            android:hint="Username"
+            android:layout_marginTop="16dp"
+            android:hint="Email"
             android:imeOptions="actionDone"
             android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/userLastName" />
 
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="232dp"
             android:layout_height="52dp"
             android:layout_marginStart="88dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="16dp"
             android:hint="Password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
 
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="16dp"
+            android:hint="Confirm Password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+
         <Button
             android:id="@+id/LoginButton"
             android:layout_width="192dp"
             android:layout_height="52dp"
             android:layout_marginStart="108dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#A9BCD0"
             android:text="Create Account"
             app:iconTint="#00A9BC"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+
+        <EditText
+            android:id="@+id/userLastName"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="16dp"
+            android:hint="Last Name"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userFirstName" />
+
+        <EditText
+            android:id="@+id/userFirstName"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="16dp"
+            android:hint="First Name"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
