@@ -14,12 +14,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateUserActivity extends AppCompatActivity {
 
-    private EditText usernameEditText, passwordEditText, usersFullName;
+    private EditText usernameEditText, passwordEditText, usersFullName, confirmpasswordEditText;
     private Button loginButton;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +37,12 @@ public class CreateUserActivity extends AppCompatActivity {
         });
 
         firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
         // Bind UI elements
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+        confirmpasswordEditText = findViewById(R.id.confirmPassword);
         usersFullName = findViewById(R.id.userFullName);
         loginButton = findViewById(R.id.LoginButton);
 
@@ -55,9 +60,15 @@ public class CreateUserActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String fullName = usersFullName.getText().toString().trim();
+        String passwordconfirm = confirmpasswordEditText.getText().toString().trim();
 
-        if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please fill in both fields", Toast.LENGTH_SHORT).show();
+        if (username.isEmpty() || password.isEmpty() || fullName.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!password.equals(passwordconfirm)) {
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -73,6 +84,7 @@ public class CreateUserActivity extends AppCompatActivity {
                         FirebaseUser user = firebaseAuth.getCurrentUser();
 
                         if (user != null) {
+                            saveUserToDatabase(user.getUid(), username, fullName);
                             sendEmailVerification(user);
                         }
                     } else {
@@ -84,6 +96,15 @@ public class CreateUserActivity extends AppCompatActivity {
                                     "Failed to create account due to an unknown error.",
                                     Toast.LENGTH_SHORT).show();
                         }
+                    }
+                });
+    }
+
+    private void saveUserToDatabase(String userId, String email, String fullName) {
+        databaseReference.child(userId).setValue(new User(fullName, email))
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(this, "Failed to save user data.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -103,5 +124,15 @@ public class CreateUserActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public static class User {
+        public String fullName;
+        public String email;
+
+        public User(String fullName, String email) {
+            this.fullName = fullName;
+            this.email = email;
+        }
     }
 }
