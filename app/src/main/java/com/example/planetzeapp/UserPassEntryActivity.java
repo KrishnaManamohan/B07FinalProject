@@ -75,8 +75,7 @@ public class UserPassEntryActivity extends AppCompatActivity {
                 }
             } else {
                 // Login failed
-                Toast.makeText(this, "Authentication Failed: " + task.getException().getMessage(),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Invalid email or password.", Toast.LENGTH_LONG).show();
             }
         });
     }
