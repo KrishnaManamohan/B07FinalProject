@@ -20,86 +20,117 @@
         app:layout_constraintVertical_bias="0.201" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="409dp"
-        android:layout_height="478dp"
+        android:id="@+id/conatiner"
+        android:layout_width="245dp"
+        android:layout_height="401dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginImageView"
-        app:layout_constraintVertical_bias="0.0">
-
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="192dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="108dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#A9BCD0"
-            android:text="Back"
-            app:iconTint="#00A9BC"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
-
-        <EditText
-            android:id="@+id/usernameEditText"
-            android:layout_width="232dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="16dp"
-            android:hint="Email"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userFullName" />
-
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="232dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="16dp"
-            android:hint="Password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
-
-        <EditText
-            android:id="@+id/confirmPassword"
-            android:layout_width="232dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="16dp"
-            android:hint="Confirm Password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
-
-        <Button
-            android:id="@+id/LoginButton"
-            android:layout_width="192dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="108dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#A9BCD0"
-            android:text="Create Account"
-            app:iconTint="#00A9BC"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+        app:layout_constraintVertical_bias="0.12">
 
         <EditText
             android:id="@+id/userFullName"
             android:layout_width="232dp"
             android:layout_height="52dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="32dp"
-            android:hint="Full Name"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="6dp"
+            android:autofillHints="this is your name"
+            android:hint="@string/full_name"
             android:imeOptions="actionDone"
             android:inputType="text"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="4dp"
+            android:autofillHints="write your password again"
+            android:hint="@string/confirm_password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@+id/LoginButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="6dp"
+            android:autofillHints="password edit text"
+            android:hint="@string/password2"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
+
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="6dp"
+            android:autofillHints="edit username"
+            android:hint="@string/email"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userFullName" />
+
+        <Button
+            android:id="@+id/LoginButton"
+            android:layout_width="240dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="2dp"
+            android:backgroundTint="#009999"
+            android:text="@string/create_account"
+            app:iconTint="#00A9BC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LoginButton"
+            app:layout_constraintVertical_bias="0.0"
+            app:tint="#1B1B1E" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="15dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
+            app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+            app:layout_constraintStart_toStartOf="@+id/imageButton3"
+            app:layout_constraintTop_toTopOf="@+id/imageButton3"
+            app:layout_constraintVertical_bias="0.518" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
