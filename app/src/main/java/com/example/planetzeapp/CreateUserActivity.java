@@ -54,7 +54,7 @@ public class CreateUserActivity extends AppCompatActivity {
     private void validateLogin() {
         String username = usernameEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
-        String lastName = usersFullName.getText().toString().trim();
+        String fullName = usersFullName.getText().toString().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in both fields", Toast.LENGTH_SHORT).show();

@@ -54,14 +54,14 @@ public class UserPassEntryActivity extends AppCompatActivity {
 
     private void validateLogin() {
 
-        String username = usernameEditText.getText().toString().trim();
+        String email = usernameEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
-        if (username.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(task -> {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 // Login successful
                 FirebaseUser user = firebaseAuth.getCurrentUser();
