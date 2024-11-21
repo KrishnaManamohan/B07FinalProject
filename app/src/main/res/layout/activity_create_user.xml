@@ -51,7 +51,7 @@
             android:imeOptions="actionDone"
             android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userLastName" />
+            app:layout_constraintTop_toBottomOf="@+id/userFullName" />
 
         <EditText
             android:id="@+id/passwordEditText"
@@ -90,24 +90,12 @@
             app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
 
         <EditText
-            android:id="@+id/userLastName"
+            android:id="@+id/userFullName"
             android:layout_width="232dp"
             android:layout_height="52dp"
             android:layout_marginStart="88dp"
-            android:layout_marginTop="16dp"
-            android:hint="Last Name"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userFirstName" />
-
-        <EditText
-            android:id="@+id/userFirstName"
-            android:layout_width="232dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="16dp"
-            android:hint="First Name"
+            android:layout_marginTop="32dp"
+            android:hint="Full Name"
             android:imeOptions="actionDone"
             android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
