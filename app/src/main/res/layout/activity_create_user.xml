@@ -105,7 +105,7 @@
             app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/backButton"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
@@ -120,16 +120,16 @@
             app:tint="#1B1B1E" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/back"
             android:layout_width="15dp"
             android:layout_height="16dp"
             android:layout_marginEnd="4dp"
             android:contentDescription="@string/todo"
             android:src="@drawable/back"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton3"
-            app:layout_constraintStart_toStartOf="@+id/imageButton3"
-            app:layout_constraintTop_toTopOf="@+id/imageButton3"
+            app:layout_constraintBottom_toBottomOf="@+id/backButton"
+            app:layout_constraintEnd_toEndOf="@+id/backButton"
+            app:layout_constraintStart_toStartOf="@+id/backButton"
+            app:layout_constraintTop_toTopOf="@+id/backButton"
             app:layout_constraintVertical_bias="0.518" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
