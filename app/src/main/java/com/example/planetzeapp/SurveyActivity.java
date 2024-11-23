@@ -2,7 +2,6 @@ package com.example.planetzeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -13,8 +12,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planetzeapp.data.SurveyData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,14 +24,22 @@ import java.util.Map;
 public class SurveyActivity extends AppCompatActivity {
 
     private int currentQuestionIndex = 0;
-    private Map<String, String> surveyAnswers = new LinkedHashMap<>(); // Store answers temporarily
-    private List<String> questions = SurveyData.getQuestions();
-    private List<List<String>> choices = SurveyData.getChoices();
+    private final Map<String, String> surveyAnswers = new LinkedHashMap<>(); // Store answers temporarily
+    private final List<String> questions = SurveyData.getQuestions();
+    private final List<List<String>> choices = SurveyData.getChoices();
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        String userId = user.getUid();
+        databaseReference = FirebaseDatabase.getInstance()
+                .getReference("Users").child(userId).child("surveyAnswers");
 
         // Load the first question
         loadQuestion(currentQuestionIndex);
@@ -43,36 +53,26 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     private void onPrevButtonClick() {
-        System.out.println("Button clicked on:" + currentQuestionIndex);
-        if (currentQuestionIndex > 0){
-
-            //Apply skip logic
+        if (currentQuestionIndex > 0) {
             currentQuestionIndex = getPreviousQuestionIndex(currentQuestionIndex, surveyAnswers);
             loadQuestion(currentQuestionIndex);
-            System.out.println("Now on:" + currentQuestionIndex);
         }
-
-
     }
 
     private void loadQuestion(int questionIndex) {
-        // Get the current question and choices
         ProgressBar progressBar = findViewById(R.id.progressBar);
-        progressBar.setProgress((int) ((currentQuestionIndex * 100) / (questions.size() - 1)));
+        progressBar.setProgress(((currentQuestionIndex * 100) / (questions.size() - 1)));
 
         String question = questions.get(questionIndex);
         List<String> currentChoices = choices.get(questionIndex);
 
-        // Set the question text
         TextView questionTextView = findViewById(R.id.questionText);
         questionTextView.setText(question);
 
-        // Set up radio buttons dynamically for the choices
         RadioGroup choicesRadioGroup = findViewById(R.id.choicesGroup);
-        choicesRadioGroup.removeAllViews();  // Remove any previous radio buttons
+        choicesRadioGroup.removeAllViews(); // Remove any previous radio buttons
         choicesRadioGroup.clearCheck();
 
-        // Create and add radio buttons
         for (String choice : currentChoices) {
             RadioButton radioButton = new RadioButton(this);
             radioButton.setText(choice);
@@ -95,25 +95,65 @@ public class SurveyActivity extends AppCompatActivity {
         RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
         String selectedAnswer = selectedRadioButton.getText().toString();
 
-        // Save the answer (temporarily, can be saved to Firebase later)
+        // Save the selected answer
         surveyAnswers.put(questions.get(currentQuestionIndex), selectedAnswer);
 
-        // Apply skip logic
+        handleSkippingLogic(currentQuestionIndex, selectedAnswer);
+
         currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex, selectedAnswer);
 
         // Check if we've reached the end of the survey
         if (currentQuestionIndex > questions.size() - 1) {
-            // TODO: Save answers to Firebase here
             Toast.makeText(this, "Survey Completed!", Toast.LENGTH_SHORT).show();
-
-            // Transition to CompleteRegistrationActivity
-            Intent intent = new Intent(SurveyActivity.this, CompleteRegistrationActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        if (currentQuestionIndex >= 0 && currentQuestionIndex <= questions.size() - 1){
+            saveAnswersToFirebase(); // Save to Firebase when the survey is completed
+        } else {
             loadQuestion(currentQuestionIndex);
         }
+    }
+
+    private void handleSkippingLogic(int questionIndex, String selectedAnswer) {
+        if (questionIndex == 0 && selectedAnswer.equals("No")) {
+            markSkippedQuestions(1, 2); // Skip questions 2 and 3
+        } else if (questionIndex == 7 && !selectedAnswer.equals("Meat-based (eat all types of animal products)")) {
+            markSkippedQuestions(8, 11); // Skip diet-related questions
+        }
+    }
+
+    private void markSkippedQuestions(int startIndex, int endIndex) {
+        for (int i = startIndex; i <= endIndex; i++) {
+            surveyAnswers.put(questions.get(i), "Skipped");
+        }
+    }
+
+    private String sanitizeKey(String key) {
+        return key.replace("/", "_")           // Replace slashes with underscores
+                .replace(".", "_")           // Replace periods
+                .replace("[", "_")           // Replace opening brackets
+                .replace("]", "_")           // Replace closing brackets
+                .replace("$", "_")           // Replace dollar signs
+                .replace("#", "_")           // Replace hashes
+                .replace(":", "_")           // Replace colons
+                .trim()                      // Remove leading and trailing spaces
+                .replaceAll("_+$", "");      // Remove trailing underscores
+    }
+
+    private void saveAnswersToFirebase() {
+        // Sanitize keys before saving
+        Map<String, String> sanitizedSurveyAnswers = new LinkedHashMap<>();
+        for (Map.Entry<String, String> entry : surveyAnswers.entrySet()) {
+            String sanitizedKey = sanitizeKey(entry.getKey());
+            String sanitizedValue = entry.getValue() != null ? entry.getValue() : "Skipped";
+
+            sanitizedSurveyAnswers.put(sanitizedKey, sanitizedValue);
+        }
+
+        databaseReference.setValue(sanitizedSurveyAnswers).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Intent intent = new Intent(SurveyActivity.this, CompleteRegistrationActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private int getNextQuestionIndex(int currentIndex, String selectedAnswer) {

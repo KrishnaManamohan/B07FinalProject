@@ -15,10 +15,10 @@ public class SurveyData {
         questions.add("6. How many short-haul flights (less than 1,500 km / 932 miles) have you taken in the past year?");
         questions.add("7. How many long-haul flights (more than 1,500 km / 932 miles) have you taken in the past year?");
         questions.add("8. What best describes your diet?");
-        questions.add("9.1. How often do you eat the following animal-based products?" + "\nBeef:");
-        questions.add("9.2. How often do you eat the following animal-based products?" + "\nPork:");
-        questions.add("9.3. How often do you eat the following animal-based products?" + "\nChicken:");
-        questions.add("9.4. How often do you eat the following animal-based products?" + "\nFish/Seafood:");
+        questions.add("9.1. How often do you eat Beef?");
+        questions.add("9.2. How often do you eat Pork?");
+        questions.add("9.3. How often do you eat Chicken?");
+        questions.add("9.4. How often do you eat Fish/Seafood?");
         questions.add("10. How often do you waste food or throw away uneaten leftovers?");
         questions.add("11. What type of home do you live in?");
         questions.add("12. How many people live in your household?");
