@@ -7,4 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".HomePageActivty">
 
+    <ImageView
+        android:id="@+id/gaugeimg"
+        android:layout_width="412dp"
+        android:layout_height="497dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.37"
+        app:srcCompat="@drawable/ecogauge" />
+
+    <TextView
+        android:id="@+id/footprint"
+        android:layout_width="154dp"
+        android:layout_height="133dp"
+        android:fontFamily="@font/micro5"
+        android:text="75"
+        android:textAlignment="center"
+        android:textColor="#1b1b1e"
+        android:textSize="160sp"
+        app:layout_constraintBottom_toBottomOf="@+id/gaugeimg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gaugeimg"
+        app:layout_constraintVertical_bias="0.407" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
