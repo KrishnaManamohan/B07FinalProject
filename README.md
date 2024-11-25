@@ -4,7 +4,7 @@
 
 ---
 ## 📱 Application UI
-<img src="https://github.com/user-attachments/assets/5c5950aa-caac-4411-99fe-2c7703068ae3" width="290">
+<img src="https://github.com/user-attachments/assets/5c5950aa-caac-4411-99fe-2c7703068ae3" width="295">
 <img src="https://github.com/user-attachments/assets/7c662ba2-82c4-44da-a73b-f96c1caeac33" width="300">
 <img src = "https://github.com/user-attachments/assets/16f888d8-9c1b-443b-9cc0-c90b880ec490" width="305">
 
