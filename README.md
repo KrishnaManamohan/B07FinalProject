@@ -4,8 +4,7 @@
 
 ---
 ## DashBoard
-![image](https://github.com/user-attachments/assets/7c662ba2-82c4-44da-a73b-f96c1caeac33)
-
+<img src="https://github.com/user-attachments/assets/7c662ba2-82c4-44da-a73b-f96c1caeac33" width="48">
 ---
 
 ## 🚀 Features  
