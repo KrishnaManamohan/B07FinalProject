@@ -41,6 +41,7 @@
             android:layout_marginStart="16dp"
             android:text="@string/question_will_appear_here"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header2" />
 
@@ -54,14 +55,6 @@
             app:layout_constraintTop_toBottomOf="@+id/questionText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:indeterminate="false"
-        android:layout_height="49dp"
-        android:progressTint="#009688" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="379dp"
         android:layout_height="wrap_content">
@@ -70,8 +63,9 @@
             android:id="@+id/nextButton"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="36dp"
             android:backgroundTint="#1B1B1E"
+            android:contentDescription="next button"
             android:text="@string/empty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -80,8 +74,9 @@
             android:id="@+id/previousButton"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="36dp"
             android:backgroundTint="#1B1B1E"
+            android:contentDescription="back button"
             android:text="@string/empty"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -108,6 +103,19 @@
             app:layout_constraintEnd_toEndOf="@+id/nextButton"
             app:layout_constraintStart_toStartOf="@+id/nextButton"
             app:layout_constraintTop_toTopOf="@+id/nextButton" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="171dp"
+            android:layout_height="30dp"
+            android:indeterminate="false"
+            android:progressTint="#009688"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
