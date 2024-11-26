@@ -14,6 +14,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 
 public class HomePageActivity extends AppCompatActivity {
@@ -41,16 +46,28 @@ public class HomePageActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
 
-        if (user != null) {
-            mail = user.getEmail();
-            if(mail != null) {
-                String[] frag = mail.split("@", 2);
-                userdisplay = (TextView) findViewById(R.id.usertxt);
-                userdisplay.setText(frag[0]);
-            } else {
-                userdisplay.setText("blankuser");
+        mail = user.getUid();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(mail).child("fullName");
+
+        databaseReference.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                DataSnapshot snapshot = task.getResult();
+                if (snapshot.exists()) {
+                    String fullName = snapshot.getValue(String.class);
+                    userdisplay = (TextView) findViewById(R.id.usertxt);
+                    String[] name1 = fullName.split(" ");
+                    userdisplay.setText(name1[0]);
+                }
             }
-        }
+        });
+//        if(mail != null) {
+//            //String[] frag = mail.split("@", 2);
+//            userdisplay = (TextView) findViewById(R.id.usertxt);
+//            userdisplay.setText(mail);
+//        } else {
+//            userdisplay.setText("blankuser");
+//        }
+
 
         logoutButton = findViewById(R.id.logoutbutton);
         logoutButton.setOnClickListener(v -> logout());
