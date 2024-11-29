@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="309dp"
+        android:layout_height="134dp"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.201" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="245dp"
+        android:layout_height="401dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintVertical_bias="0.12">
+
+        <EditText
+            android:id="@+id/nameField"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="6dp"
+            android:autofillHints="Enter your name."
+            android:hint="@string/full_name"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/confirmPasswordField"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:hint="@string/confirm_password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordField"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/passwordField"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="6dp"
+            android:autofillHints="password edit text"
+            android:hint="@string/password2"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailField"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/emailField"
+            android:layout_width="232dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="6dp"
+            android:autofillHints="edit username"
+            android:hint="@string/email"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameField"
+            tools:ignore="TextContrastCheck" />
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createButton"
+            app:layout_constraintVertical_bias="0.0"
+            app:tint="#1B1B1E" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="15dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/backButton"
+            app:layout_constraintEnd_toEndOf="@+id/backButton"
+            app:layout_constraintHorizontal_bias="0.527"
+            app:layout_constraintStart_toStartOf="@+id/backButton"
+            app:layout_constraintTop_toTopOf="@+id/backButton"
+            app:layout_constraintVertical_bias="0.538" />
+
+        <Button
+            android:id="@+id/createButton"
+            android:layout_width="240dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#009999"
+            android:text="@string/create_account"
+            app:iconTint="#00A9BC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPasswordField"
+            tools:ignore="TextContrastCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

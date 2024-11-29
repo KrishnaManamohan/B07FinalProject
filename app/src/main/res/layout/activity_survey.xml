@@ -1,0 +1,121 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textStyle="bold"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="628dp">
+
+        <ImageView
+            android:id="@+id/loginImageView3"
+            android:layout_width="327dp"
+            android:layout_height="114dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.126" />
+
+        <TextView
+            android:id="@+id/header2"
+            android:layout_width="346dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Complete this one-time survey to continue."
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginImageView3" />
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="347dp"
+            android:layout_height="78dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/question_will_appear_here"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header2" />
+
+        <RadioGroup
+            android:id="@+id/choicesGroup"
+            android:layout_width="345dp"
+            android:layout_height="284dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="379dp"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="36dp"
+            android:backgroundTint="#1B1B1E"
+            android:contentDescription="next button"
+            android:text="@string/empty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/previousButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="36dp"
+            android:backgroundTint="#1B1B1E"
+            android:contentDescription="back button"
+            android:text="@string/empty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/back4"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/previousButton"
+            app:layout_constraintStart_toStartOf="@+id/previousButton"
+            app:layout_constraintTop_toTopOf="@+id/previousButton" />
+
+        <ImageView
+            android:id="@+id/back5"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="@string/todo"
+            android:rotation="180"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/nextButton"
+            app:layout_constraintEnd_toEndOf="@+id/nextButton"
+            app:layout_constraintStart_toStartOf="@+id/nextButton"
+            app:layout_constraintTop_toTopOf="@+id/nextButton" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="171dp"
+            android:layout_height="30dp"
+            android:indeterminate="false"
+            android:progressTint="#009688"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
+

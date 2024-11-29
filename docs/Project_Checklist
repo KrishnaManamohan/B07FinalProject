@@ -1,0 +1,77 @@
+Project Checklist for CSCB07 – Planetze App
+
+General Requirements:
+[x] Confirm group composition and assign roles (Scrum Master, etc.).
+[x] Review “Planetze Requirements” document and create a set of user stories.
+[x] Submit Team Agreement on Quercus by Nov. 3rd (signed by all members).
+[] Attend tutorial sessions in November (weeks of Nov. 11 and Nov. 25).
+[] Ensure each member's contribution is evaluated separately.
+
+Scrum Process:
+[x] Schedule a meeting to establish a team agreement:
+  [x] Communication methods.
+  [x] Expected response times.
+  [x] Nature and frequency of meetings.
+  [x] Contingency plans.
+[] Conduct daily standup meetings (minimum 3 per week), documenting the following:
+  [] What has been completed since the last meeting?
+  [] What will be finished before the next meeting?
+  [] Are there any obstacles?
+[] Create a sprint backlog with story points to indicate task complexity.
+[] Use Jira to track user stories, and ensure the TA is added to the project.
+  [] Use Scrum effectively throughout the development process:
+  [] Maintain balanced workload across 2-3 sprints.
+  [] Consistently communicate and document progress in standups.
+  [] Ensure Jira tasks are updated regularly.
+
+Version Control:
+[] Set up Git repository and ensure team members have access.
+[] Ensure proper use of commits, branching, and pull requests.
+[] Document Git processes (branching, merging, pull requests) in the project.
+
+App Development:
+[] Implement core app functionalities according to the user stories.
+[] Ensure the app provides:
+  [] Real-time carbon footprint calculations.
+  [] Visual dashboards.
+  [] Regional comparisons to encourage action on reducing carbon footprint.
+[] Refactor login module using the Model-View-Presenter (MVP) approach.
+[] Write JUnit tests for the presenter using Mockito to simulate model and view interactions.
+[] Maximize line coverage in your tests.
+
+Design & UI:
+[] Create clean, cohesive UI design:
+  [] Ensure consistency in branding and design elements.
+  [] Prioritize user-friendly design with a minimal learning curve.
+
+Testing & Code Quality:
+[] Test app functionality thoroughly.
+[] Ensure code is easy to read, modify, and reuse.
+[] Document code properly for readability and maintainability.
+
+Video Demo:
+[] Record a 5-10 minute video demonstrating the usage of the app.
+[] Include link to the video in the submission document.
+
+Submission:
+[] Prepare deliverables for submission:
+  [] The application code.
+  [] Code documentation.
+  [] A document with:
+    [] Main tasks completed by each member.
+    [] Summary of standup meetings.
+    [] Link to the video.
+[] Submit deliverables by Dec. 3rd via Quercus.
+
+Peer Evaluation:
+[] Complete peer evaluation on Quercus by Dec. 3rd (confidential, scale of 5).
+
+Grading Considerations:
+[] Ensure the main functionalities of the app are fully implemented (45 points).
+[] Ensure UI design is cohesive and user-friendly (20 points).
+[] Follow Scrum processes effectively (12 points).
+[] Use Git and version control properly (8 points).
+[] Write tests and ensure code quality (7 points).
+[] Maintain clean and reusable code (5 points).
+[] Record a clear and informative video demo (3 points).
+[] Ensure the peer evaluation is submitted (5 points).
