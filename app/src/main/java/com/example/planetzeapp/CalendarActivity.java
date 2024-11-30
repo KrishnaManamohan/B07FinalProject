@@ -52,7 +52,7 @@ public class CalendarActivity extends AppCompatActivity {
         saveButton.setOnClickListener(v -> saveToFirebase());
 
         findViewById(R.id.backButtonC).setOnClickListener(v -> {
-            Intent intent = new Intent(CalendarActivity.this, EcoTrackerActivity.class);
+            Intent intent = new Intent(CalendarActivity.this, HomePageActivity.class);
             startActivity(intent);
         });
 

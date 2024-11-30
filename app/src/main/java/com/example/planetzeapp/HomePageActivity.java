@@ -42,6 +42,16 @@ public class HomePageActivity extends AppCompatActivity {
             return insets;
         });
 
+        findViewById(R.id.habitsButton).setOnClickListener(v -> {
+            Intent intent = new Intent(HomePageActivity.this, HabitActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.dailyTrackingButton).setOnClickListener(v -> {
+            Intent intent = new Intent(HomePageActivity.this, CalendarActivity.class);
+            startActivity(intent);
+        });
+
         txtcounter = findViewById(R.id.footprint);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -111,11 +121,10 @@ public class HomePageActivity extends AppCompatActivity {
                 startActivity(intent);
             });
 
-            // Redirect to EcoTrackerActivity
-            findViewById(R.id.ecoTrackerButton2).setOnClickListener(v -> {
-                Intent intent = new Intent(HomePageActivity.this, EcoTrackerActivity.class);
-                startActivity(intent);
-            });
+//            findViewById(R.id.ecoTrackerButton2).setOnClickListener(v -> {
+//                Intent intent = new Intent(HomePageActivity.this, EcoTrackerActivity.class);
+//                startActivity(intent);
+//            });
         }
     }
 
@@ -141,6 +150,8 @@ public class HomePageActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 }
 
 
