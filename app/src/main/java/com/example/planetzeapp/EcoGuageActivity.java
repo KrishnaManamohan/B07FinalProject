@@ -145,6 +145,8 @@ public class EcoGuageActivity extends AppCompatActivity {
                 return 30f;
             case "Electric":
                 return 10f;
+            case "Diesel":
+                return 25f;
             default:
                 return 0f;
         }
