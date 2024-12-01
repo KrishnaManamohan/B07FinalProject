@@ -84,22 +84,23 @@
         android:id="@+id/ecoTrackerButton2"
         android:layout_width="242dp"
         android:layout_height="65dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginBottom="204dp"
         android:text="Temporary: Eco Tracker"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.749" />
 
     <Button
         android:id="@+id/ecoBalenceButton"
-        android:layout_width="245dp"
-        android:layout_height="66dp"
+        android:layout_width="241dp"
+        android:layout_height="65dp"
         android:text="Temporary: Eco Balence"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.867" />
+        app:layout_constraintVertical_bias="0.863" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
