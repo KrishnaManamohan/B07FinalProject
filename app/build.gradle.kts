@@ -35,6 +35,7 @@ android {
     }
 }
 
+
 dependencies {
     implementation ("com.wdullaer:materialdatetimepicker:4.2.3")
     implementation ("com.google.firebase:firebase-firestore:24.5.0")
@@ -55,6 +56,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    testImplementation("org.mockito:mockito-core:5.5.0")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation("org.mockito:mockito-android:5.5.0")
+    testImplementation("com.google.android.gms:play-services-tasks:18.2.0")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    testImplementation ("junit:junit:4.13.2")
+
     // Add MPAndroidChart dependency for charts (line chart, pie chart, etc.)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0") // Use latest stable version
 }
