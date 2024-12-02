@@ -121,10 +121,16 @@ public class HomePageActivity extends AppCompatActivity {
                 startActivity(intent);
             });
 
-//            findViewById(R.id.ecoTrackerButton2).setOnClickListener(v -> {
-//                Intent intent = new Intent(HomePageActivity.this, EcoTrackerActivity.class);
-//                startActivity(intent);
-//            });
+            // Redirect to EcoTrackerActivity
+            findViewById(R.id.ecoTrackerButton2).setOnClickListener(v -> {
+                Intent intent = new Intent(HomePageActivity.this, EcoTrackerActivity.class);
+                startActivity(intent);
+            });
+
+            findViewById(R.id.ecoBalenceButton).setOnClickListener(v -> {
+                Intent intent = new Intent(HomePageActivity.this, EcoBalanceActivity.class);
+                startActivity(intent);
+            });
         }
     }
 
