@@ -24,7 +24,6 @@ public class EmissionCalculator {
             "transportFormulas.csv",
             "foodEmissions.csv",
             "consumptionEmission.csv"
-            // Add more files as needed
     };
 
     // Initialize multipliers from the given CSV files
