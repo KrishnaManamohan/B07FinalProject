@@ -8,91 +8,48 @@
     android:background="#FFFFFF"
     tools:context=".CalendarActivity">
 
-    <!-- Button to select date -->
-
-    <!-- TextView to display selected date -->
-
-    <!-- ScrollView containing Spinner elements -->
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="410dp"
-        android:layout_height="358dp"
+        android:layout_width="411dp"
+        android:layout_height="190dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="360dp">
+        <Button
+            android:id="@+id/select_date_button"
+            android:layout_width="51dp"
+            android:layout_height="46dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="88dp"
+            android:text="Select Date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.231"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="408dp"
-                android:layout_height="359dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/mdtp_done_background_color" />
+        <TextView
+            android:id="@+id/selected_date_text"
+            android:layout_width="164dp"
+            android:layout_height="59dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="132dp"
+            android:layout_marginBottom="96dp"
+            android:text="Selected Date: Please Choose"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageView
-                android:id="@+id/loginImageView5"
-                android:layout_width="309dp"
-                android:layout_height="134dp"
-                android:contentDescription="@string/logo"
-                android:src="@drawable/logo"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.097" />
+        <Button
+            android:id="@+id/backButtonC"
+            android:layout_width="158dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="124dp"
+            android:layout_marginTop="144dp"
+            android:text="back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/select_date_button"
-                android:layout_width="163dp"
-                android:layout_height="45dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="188dp"
-                android:text="Select Date"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.135"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/selected_date_text"
-                android:layout_width="170dp"
-                android:layout_height="31dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="32dp"
-                android:layout_marginBottom="84dp"
-                android:text="Selected Date: Please Choose"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/backButtonC"
-                android:layout_width="158dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="284dp"
-                android:text="back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="120dp"
-                android:layout_height="140dp"
-                android:layout_marginTop="192dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.857"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/circle" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -281,7 +238,7 @@
                     android:id="@+id/saveButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Save"
+                    android:text="Record"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
