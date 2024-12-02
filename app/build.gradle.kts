@@ -62,6 +62,7 @@ dependencies {
     testImplementation("com.google.android.gms:play-services-tasks:18.2.0")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
     testImplementation ("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-all:1.10.19")
 
     // Add MPAndroidChart dependency for charts (line chart, pie chart, etc.)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0") // Use latest stable version

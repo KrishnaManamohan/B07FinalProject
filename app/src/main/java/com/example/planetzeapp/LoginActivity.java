@@ -2,7 +2,6 @@ package com.example.planetzeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,17 +12,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
     private EditText usernameEditText, passwordEditText;
     private Button loginButton;
-    private FirebaseAuth firebaseAuth;
-    private LoginPresenter presenter;
+    private LoginContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +31,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             return insets;
         });
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        presenter = new LoginPresenter(this, firebaseAuth);
+        presenter = new LoginPresenter(this, new LoginModel(FirebaseAuth.getInstance()));
 
         usernameEditText = findViewById(R.id.emailFieldL);
         passwordEditText = findViewById(R.id.passwordFieldL);
