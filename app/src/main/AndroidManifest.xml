@@ -62,6 +62,9 @@
         <activity
             android:name=".EcoGaugeActivity"
             android:exported="false" />
+        <activity
+            android:name=".EcoBalanceActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
