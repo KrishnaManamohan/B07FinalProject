@@ -1,63 +1,79 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:textStyle="bold"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:textStyle="bold">
+
+
+    <ImageView
+        android:id="@+id/loginImageView3"
+        android:layout_width="171dp"
+        android:layout_height="72dp"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintVertical_bias="0.445" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="628dp">
-
-        <ImageView
-            android:id="@+id/loginImageView3"
-            android:layout_width="327dp"
-            android:layout_height="114dp"
-            android:contentDescription="@string/logo"
-            android:src="@drawable/logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.126" />
-
-        <TextView
-            android:id="@+id/header2"
-            android:layout_width="346dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Complete this one-time survey to continue."
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginImageView3" />
-
-        <TextView
-            android:id="@+id/questionText"
-            android:layout_width="347dp"
-            android:layout_height="78dp"
-            android:layout_marginStart="16dp"
-            android:text="@string/question_will_appear_here"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header2" />
+        android:id="@+id/constraintLayout5"
+        android:layout_width="371dp"
+        android:layout_height="381dp"
+        android:layout_marginTop="148dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RadioGroup
             android:id="@+id/choicesGroup"
-            android:layout_width="345dp"
-            android:layout_height="284dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="323dp"
+            android:layout_height="255dp"
+            android:layout_marginTop="2dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/questionText" />
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="321dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/question_will_appear_here"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header2" />
+
+        <TextView
+            android:id="@+id/header2"
+            android:layout_width="347dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:text="Complete this one-time survey to continue."
+            android:textAlignment="center"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="379dp"
-        android:layout_height="wrap_content">
+        android:id="@+id/constraintLayout2"
+        android:layout_width="361dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
         <Button
             android:id="@+id/nextButton"
@@ -117,5 +133,5 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
