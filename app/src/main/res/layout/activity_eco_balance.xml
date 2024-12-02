@@ -1,0 +1,80 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Total Emissions Display -->
+        <TextView
+            android:id="@+id/totalEmissionsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Emissions: 0.00 tons"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp"
+            android:textStyle="bold" />
+
+        <!-- Dropdown for Project Selection -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Select a Project or Country"
+            android:textSize="18sp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/projectDropdown"
+            android:layout_width="369dp"
+            android:layout_height="68dp"
+            android:layout_marginBottom="16dp"
+            android:hint="Choose a project"
+            android:inputType="text" />
+
+        <!-- Project Description -->
+        <TextView
+            android:id="@+id/projectDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Project details will appear here"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Input for Tons of CO2 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter tons of CO2e to offset"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/inputTons"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:layout_marginBottom="16dp"
+            android:hint="Enter quantity"
+            android:inputType="numberDecimal" />
+
+        <!-- Calculate and Purchase Button -->
+        <Button
+            android:id="@+id/purchaseButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Purchase Offsets"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Cost Display -->
+        <TextView
+            android:id="@+id/costTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Cost: $0.00"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>
