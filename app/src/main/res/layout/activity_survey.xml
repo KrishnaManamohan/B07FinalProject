@@ -1,0 +1,137 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:textStyle="bold">
+
+
+    <ImageView
+        android:id="@+id/loginImageView3"
+        android:layout_width="171dp"
+        android:layout_height="72dp"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintVertical_bias="0.445" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="371dp"
+        android:layout_height="381dp"
+        android:layout_marginTop="148dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioGroup
+            android:id="@+id/choicesGroup"
+            android:layout_width="323dp"
+            android:layout_height="255dp"
+            android:layout_marginTop="2dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionText" />
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="321dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/question_will_appear_here"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header2" />
+
+        <TextView
+            android:id="@+id/header2"
+            android:layout_width="347dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:text="Complete this one-time survey to continue."
+            android:textAlignment="center"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="361dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="36dp"
+            android:backgroundTint="#1B1B1E"
+            android:contentDescription="next button"
+            android:text="@string/empty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/previousButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="36dp"
+            android:backgroundTint="#1B1B1E"
+            android:contentDescription="back button"
+            android:text="@string/empty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/back4"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/previousButton"
+            app:layout_constraintStart_toStartOf="@+id/previousButton"
+            app:layout_constraintTop_toTopOf="@+id/previousButton" />
+
+        <ImageView
+            android:id="@+id/back5"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="@string/todo"
+            android:rotation="180"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/nextButton"
+            app:layout_constraintEnd_toEndOf="@+id/nextButton"
+            app:layout_constraintStart_toStartOf="@+id/nextButton"
+            app:layout_constraintTop_toTopOf="@+id/nextButton" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="171dp"
+            android:layout_height="30dp"
+            android:indeterminate="false"
+            android:progressTint="#009688"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

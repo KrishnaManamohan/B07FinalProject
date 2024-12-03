@@ -1,0 +1,24 @@
+answer,value
+Vegetarian,1000
+Vegan,500
+Pescatarian (fish/seafood),1500
+Meat-based (eat all types of animal products)DailyB,2500
+Meat-based (eat all types of animal products)Frequently (3-5 times/week)B,1900
+Meat-based (eat all types of animal products)Occasionally (1-2 times/week)B,1300
+Meat-based (eat all types of animal products)NeverB,0
+Meat-based (eat all types of animal products)DailyP,1450
+Meat-based (eat all types of animal products)Frequently (3-5 times/week)P,860
+Meat-based (eat all types of animal products)Occasionally (1-2 times/week)P,450
+Meat-based (eat all types of animal products)NeverP,0
+Meat-based (eat all types of animal products)DailyC,950
+Meat-based (eat all types of animal products)Frequently (3-5 times/week)C,600
+Meat-based (eat all types of animal products)Occasionally (1-2 times/week)C,200
+Meat-based (eat all types of animal products)NeverC,0
+Meat-based (eat all types of animal products)DailyF,800
+Meat-based (eat all types of animal products)Frequently (3-5 times/week)F,500
+Meat-based (eat all types of animal products)Occasionally (1-2 times/week)F,150
+Meat-based (eat all types of animal products)NeverF,0
+NeverFoodWaste,0
+RarelyFoodWaste,23.4
+OccasionallyFoodWaste,70.2
+FrequentlyFoodWaste,140.4
