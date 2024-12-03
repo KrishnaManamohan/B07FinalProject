@@ -3,7 +3,7 @@ package com.example.planetzeapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,7 +24,7 @@ public class CalendarActivity extends AppCompatActivity {
     private TextView selectedDateText;
     private TextView dailyScore;
     private Spinner q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11;
-    private Button saveButton;
+    private ImageButton saveButton;
     private String userId;
 
     @Override
@@ -49,13 +48,13 @@ public class CalendarActivity extends AppCompatActivity {
         dailyScore= findViewById(R.id.dailyScore);
 
         selectedDateText = findViewById(R.id.selected_date_text);
-        Button selectDateButton = findViewById(R.id.select_date_button);
+        ImageButton selectDateButton = findViewById(R.id.select_date_button);
         selectDateButton.setOnClickListener(v -> openDatePicker());
 
         saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(v -> saveToFirebase());
 
-        findViewById(R.id.backButtonC).setOnClickListener(v -> {
+        findViewById(R.id.homePageButton).setOnClickListener(v -> {
             Intent intent = new Intent(CalendarActivity.this, HomePageActivity.class);
             startActivity(intent);
         });

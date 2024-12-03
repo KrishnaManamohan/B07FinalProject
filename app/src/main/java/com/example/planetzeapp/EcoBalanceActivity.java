@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +62,7 @@ public class EcoBalanceActivity extends AppCompatActivity {
     private TextView projectDescription;
     private TextView costTextView;
     private TextView totalEmissionsTextView;
-    private Button purchaseButton;
+    private ImageButton purchaseButton;
 
     private double selectedProjectCost = 0.0;
     private double totalEmissions = 100.0;
@@ -129,7 +128,7 @@ public class EcoBalanceActivity extends AppCompatActivity {
 
         purchaseButton.setOnClickListener(view -> handlePurchase());
 
-        findViewById(R.id.backButtonBalance).setOnClickListener(v -> {
+        findViewById(R.id.homePageButton).setOnClickListener(v -> {
             Intent intent = new Intent(EcoBalanceActivity.this, HomePageActivity.class);
             startActivity(intent);
         });
@@ -148,11 +147,11 @@ public class EcoBalanceActivity extends AppCompatActivity {
                         // Check if local and Firebase values differ
                         if (firebaseEmissions != totalEmissions) {
                             totalEmissions = firebaseEmissions; // Synchronize local variable
-                            totalEmissionsTextView.setText(String.format("Total Emissions: %.2f tons", totalEmissions));
+                            totalEmissionsTextView.setText(String.format("%.2f", totalEmissions));
                             Toast.makeText(EcoBalanceActivity.this, "Synchronized with Firebase data.", Toast.LENGTH_SHORT).show();
                         } else {
                             // No difference; just display the value
-                            totalEmissionsTextView.setText(String.format("Total Emissions: %.2f tons", totalEmissions));
+                            totalEmissionsTextView.setText(String.format("%.2f", totalEmissions));
                         }
                     } else {
                         Toast.makeText(EcoBalanceActivity.this, "Firebase data is null. Retaining local value.", Toast.LENGTH_SHORT).show();
@@ -235,9 +234,9 @@ public class EcoBalanceActivity extends AppCompatActivity {
         if (!tonsInput.isEmpty() && selectedProjectCost > 0) {
             double tons = Double.parseDouble(tonsInput);
             double totalCost = tons * selectedProjectCost;
-            costTextView.setText(String.format("Total Cost: $%.2f", totalCost));
+            costTextView.setText(String.format("$%.2f", totalCost));
         } else {
-            costTextView.setText("Total Cost: $0.00");
+            costTextView.setText("$0.00");
         }
     }
 
@@ -257,7 +256,7 @@ public class EcoBalanceActivity extends AppCompatActivity {
                         .addOnSuccessListener(aVoid -> {
                             // Update local value and UI
                             totalEmissions = updatedEmissions;
-                            totalEmissionsTextView.setText(String.format("Total Emissions: %.2f tons", totalEmissions));
+                            totalEmissionsTextView.setText(String.format("%.2f", totalEmissions));
                             Toast.makeText(EcoBalanceActivity.this, "Purchase Successful! Emissions updated.", Toast.LENGTH_LONG).show();
                         })
                         .addOnFailureListener(e -> {

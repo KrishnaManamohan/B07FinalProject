@@ -97,8 +97,17 @@ public class EcoGaugeActivity extends AppCompatActivity {
         entries.add(new PieEntry((float) FetchUserEmissionData.energyEmission, "Energy"));
 
         // Set up the dataset and colors
+        int[] blackAndWhiteColors = {
+                Color.BLACK,
+                Color.DKGRAY,  // Dark gray
+                Color.GRAY,    // Medium gray
+                Color.LTGRAY,  // Light gray
+                Color.WHITE
+        };
+
+// Apply the custom colors to your dataset
         PieDataSet dataSet = new PieDataSet(entries, "CO2 Emissions");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(blackAndWhiteColors);
         dataSet.setValueTextSize(16f);
         dataSet.setValueTextColor(android.graphics.Color.WHITE);
 

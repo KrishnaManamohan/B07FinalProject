@@ -35,7 +35,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         resetLink = findViewById(R.id.forgotPasswordButton);
         resetLink.setOnClickListener(v -> sendResetLink());
 
-        findViewById(R.id.backButton).setOnClickListener(v -> {
+        findViewById(R.id.homePageButton).setOnClickListener(v -> {
             Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
             startActivity(intent);
         });

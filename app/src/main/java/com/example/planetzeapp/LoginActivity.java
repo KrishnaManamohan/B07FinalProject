@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 passwordEditText.getText().toString().trim()
         ));
 
-        findViewById(R.id.backButton).setOnClickListener(v -> {
+        findViewById(R.id.homePageButton).setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, StartUpActivity.class);
             startActivity(intent);
         });

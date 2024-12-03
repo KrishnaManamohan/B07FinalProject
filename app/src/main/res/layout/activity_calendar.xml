@@ -10,42 +10,29 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="411dp"
-        android:layout_height="190dp"
+        android:layout_width="377dp"
+        android:layout_height="224dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp">
-
-        <Button
-            android:id="@+id/select_date_button"
-            android:layout_width="134dp"
-            android:layout_height="43dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="88dp"
-            android:text="Select Date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.231"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/selected_date_text"
-            android:layout_width="164dp"
-            android:layout_height="59dp"
+            android:layout_width="293dp"
+            android:layout_height="119dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="132dp"
-            android:layout_marginBottom="112dp"
-            android:text="Selected Date: Please Choose"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/backButtonC"
-            android:layout_width="158dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="144dp"
-            android:text="back"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Select a Date Below"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:typeface="normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,26 +40,59 @@
             android:id="@+id/dailyScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="4dp"
             android:text="Daily Emission Score"
+            android:textStyle="bold|italic"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/select_date_button"
+            android:layout_width="65dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="calender"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.012"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selected_date_text"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/calender" />
+
+        <ImageButton
+            android:id="@+id/saveButton"
+            android:layout_width="210dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="save button"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toEndOf="@+id/select_date_button"
+            app:layout_constraintTop_toBottomOf="@+id/selected_date_text"
+            app:srcCompat="@drawable/track" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="363dp"
-        android:layout_height="472dp"
+        android:layout_width="372dp"
+        android:layout_height="466dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.060000002">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
             android:orientation="vertical">
 
             <TextView
@@ -244,16 +264,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/saveButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Record"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/homePageButton"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="70dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/back_button"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView"
+        app:layout_constraintVertical_bias="0.56"
+        app:tint="#1B1B1E" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="15dp"
+        android:layout_height="16dp"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@+id/homePageButton"
+        app:layout_constraintEnd_toEndOf="@+id/homePageButton"
+        app:layout_constraintStart_toStartOf="@+id/homePageButton"
+        app:layout_constraintTop_toTopOf="@+id/homePageButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
