@@ -1,147 +1,91 @@
 package com.example.planetzeapp;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import com.google.firebase.auth.FirebaseAuth;
+import static org.mockito.Mockito.*;
+
+import com.example.planetzeapp.LoginContract;
+import com.example.planetzeapp.LoginPresenter;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.DataSnapshot;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import org.mockito.Mockito;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LoginPresenterTest {
 
     @Mock
     private LoginContract.View mockView;
 
     @Mock
-    private FirebaseAuth mockFirebaseAuth;
-
-    @Mock
-    private FirebaseUser mockUser;
-
-    @Mock
-    private DatabaseReference mockDatabaseReference;
-
-    @Mock
-    private Task<AuthResult> mockAuthResultTask;
-
-    @Mock
-    private Task<DataSnapshot> mockUserTask;
-
-    @Mock
-    private DataSnapshot mockDataSnapshot;
+    private LoginContract.Model mockModel;
 
     private LoginPresenter presenter;
-    private AutoCloseable closeable;
 
     @Before
-    public void setUp() throws Exception {
-        closeable = MockitoAnnotations.openMocks(this);
-        presenter = new LoginPresenter(mockView, mockFirebaseAuth);
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        presenter = new LoginPresenter(mockView, mockModel);
     }
 
-    @After
-    public void tearDown() throws Exception {
-        closeable.close();
+
+    @Test
+    public void validateLogin_callsModelLogin_withValidInputs() {
+        String email = "test@example.com";
+        String password = "password123";
+
+        presenter.validateLogin(email, password);
+        verify(mockModel).login(eq(email), eq(password), any(LoginContract.Model.LoginCallback.class));
     }
 
     @Test
-    public void testEmptyEmailOrPasswordShowsValidationError() {
-        // Test empty email and password scenarios
-        presenter.validateLogin("", "password");
-        verify(mockView, times(1)).showValidationError("Please fill in all fields");
-
-        presenter.validateLogin("email@example.com", "");
-        verify(mockView, times(1)).showValidationError("Please fill in all fields");
-    }
-
-    @Test
-    public void testSuccessfulLoginNavigatesToHomePage() {
-        when(mockFirebaseAuth.signInWithEmailAndPassword(anyString(), anyString())).thenReturn(mockAuthResultTask);
-        when(mockAuthResultTask.addOnCompleteListener(any())).thenAnswer(invocation -> {
-            OnCompleteListener<AuthResult> listener = invocation.getArgument(0);
-            Task<AuthResult> task = mock(Task.class);
-            when(task.isSuccessful()).thenReturn(true);
-            listener.onComplete(task);
-            return null;
-        });
-        when(mockFirebaseAuth.getCurrentUser()).thenReturn(mockUser);
-        when(mockUser.getUid()).thenReturn("userId");
-
-        presenter.validateLogin("email@example.com", "password");
-
+    public void onLoginSuccess_callsShowLoginSuccess_onView() {
+        presenter.onLoginSuccess(mock(FirebaseUser.class));
         verify(mockView).showLoginSuccess();
-        verify(mockView).navigateToHomePage();
     }
 
     @Test
-    public void testNetworkErrorShowsNetworkError() {
-        when(mockFirebaseAuth.signInWithEmailAndPassword(anyString(), anyString())).thenReturn(mockAuthResultTask);
-        when(mockAuthResultTask.addOnCompleteListener(any())).thenAnswer(invocation -> {
-            OnCompleteListener<AuthResult> listener = invocation.getArgument(0);
-            Task<AuthResult> task = mock(Task.class);
-            when(task.isSuccessful()).thenReturn(false);
-            when(task.getException()).thenReturn(new Exception("Network error"));
-            listener.onComplete(task);
-            return null;
-        });
+    public void onValidationError_callsShowValidationError_onView() {
+        presenter.onValidationError("Invalid input");
+        verify(mockView).showValidationError("Invalid input");
+    }
 
-        presenter.validateLogin("email@example.com", "password");
-
+    @Test
+    public void onNetworkError_callsShowNetworkError_onView() {
+        presenter.onNetworkError();
         verify(mockView).showNetworkError();
     }
 
     @Test
-    public void testInvalidCredentialsShowError() {
-        when(mockFirebaseAuth.signInWithEmailAndPassword(anyString(), anyString())).thenReturn(mockAuthResultTask);
-        when(mockAuthResultTask.addOnCompleteListener(any())).thenAnswer(invocation -> {
-            OnCompleteListener<AuthResult> listener = invocation.getArgument(0);
-            Task<AuthResult> task = mock(Task.class);
-            when(task.isSuccessful()).thenReturn(false);
-            when(task.getException()).thenReturn(new Exception("Invalid credentials"));
-            listener.onComplete(task);
-            return null;
-        });
-
-        presenter.validateLogin("email@example.com", "password");
-
+    public void onInvalidCredentials_callsShowInvalidCredentialsError_onView() {
+        presenter.onInvalidCredentials();
         verify(mockView).showInvalidCredentialsError();
     }
 
     @Test
-    public void testUserProfileErrorShowsError() {
-        when(mockFirebaseAuth.signInWithEmailAndPassword(anyString(), anyString())).thenReturn(mockAuthResultTask);
-        when(mockAuthResultTask.addOnCompleteListener(any())).thenAnswer(invocation -> {
-            OnCompleteListener<AuthResult> listener = invocation.getArgument(0);
-            Task<AuthResult> task = mock(Task.class);
-            when(task.isSuccessful()).thenReturn(true);
-            listener.onComplete(task);
-            return null;
-        });
-        when(mockFirebaseAuth.getCurrentUser()).thenReturn(mockUser);
-        when(mockUser.getUid()).thenReturn("userId");
+    public void onUserDataRetrieved_navigatesToHomePage_whenSurveyComplete() {
+        presenter.onUserDataRetrieved(true, false);
+        verify(mockView).navigateToHomePage();
+    }
 
-        when(mockDatabaseReference.get()).thenReturn(mockUserTask);
-        when(mockUserTask.addOnCompleteListener(any())).thenAnswer(invocation -> {
-            OnCompleteListener<DataSnapshot> listener = invocation.getArgument(0);
-            Task<DataSnapshot> task = mock(Task.class);
-            when(task.isSuccessful()).thenReturn(false);
-            listener.onComplete(task);
-            return null;
-        });
+    @Test
+    public void onUserDataRetrieved_navigatesToSurveyPage_whenSurveyNotComplete_andCountryExists() {
+        presenter.onUserDataRetrieved(false, true);
+        verify(mockView).navigateToSurveyPage();
+    }
 
-        presenter.validateLogin("email@example.com", "password");
+    @Test
+    public void onUserDataRetrieved_navigatesToCountrySelection_whenSurveyNotComplete_andNoCountryExists() {
+        presenter.onUserDataRetrieved(false, false);
+        verify(mockView).navigateToCountrySelection();
+    }
 
-        verify(mockView).showError("Error retrieving user data.");
+    @Test
+    public void onError_callsShowError_onView() {
+        presenter.onError("An unexpected error occurred");
+        verify(mockView).showError("An unexpected error occurred");
     }
 }
