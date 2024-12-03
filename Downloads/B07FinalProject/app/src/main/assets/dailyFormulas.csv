@@ -1,0 +1,46 @@
+answer,value
+Gasoline,.24
+Diesel,.27
+Hybrid,.16
+Electric,.05
+0 hours,0
+0-1 hours,.673
+1-3 hour,2.25
+3-5 hours,4.49
+5+ hours,8.41
+SHF0,0
+SHF1,225
+SHF2,225
+SHF3+,600
+LHF0,0
+LHF1,825
+LHF2,825
+LHF3+,2200
+B0,0
+B1,6.85
+B2,13.7
+B3+,20.55
+C0,0
+C1,2.6
+C2,5.2
+C3+,7.8
+P0,0
+P1,2.97
+P2,7.94
+P3+,11.91
+F0,0
+F1,2.19
+F2,4.38
+F3+,6.57
+PB0,0
+PB1,2.74
+PB2,5.48
+PB3+,8.22
+CI0,0
+CI1,10
+CI2,20
+CI3+,30
+EI0,0
+EI1,300
+EI2,600
+EI3+,900

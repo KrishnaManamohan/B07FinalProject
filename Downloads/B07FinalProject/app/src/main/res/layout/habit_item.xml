@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/habitName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Habit Name"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/habitCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/habitScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/adoptButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adopt"
+        android:padding="4dp" />
+
+
+</LinearLayout>
