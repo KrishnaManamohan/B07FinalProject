@@ -72,6 +72,7 @@ public class EcoBalanceActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +83,7 @@ public class EcoBalanceActivity extends AppCompatActivity {
 
         // Check if the user is logged in
         if (user == null) {
-            Toast.makeText(this, getString(R.string.error_not_logged_in), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error: User not logged in!", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -116,7 +117,6 @@ public class EcoBalanceActivity extends AppCompatActivity {
         // Show all project names when double-clicked
         projectDropdown.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                v.performClick(); // For accessibility compliance
                 projectDropdown.showDropDown();
             }
             return false;
@@ -141,19 +141,35 @@ public class EcoBalanceActivity extends AppCompatActivity {
     }
 
     private void fetchTotalEmissions() {
-        totalEmissionsTextView.setText(getString(R.string.loading));
+        // Display loading state while fetching data
+        totalEmissionsTextView.setText("Loading...");
 
         databaseReference.child("AnnualEmission").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Double firebaseEmissions = snapshot.getValue(Double.class);
-                totalEmissions = (firebaseEmissions != null) ? firebaseEmissions : totalEmissions;
-                totalEmissionsTextView.setText(String.format(Locale.getDefault(), "%.2f", totalEmissions));
+                if (snapshot.exists()) {
+                    Double firebaseEmissions = snapshot.getValue(Double.class);
+                    if (firebaseEmissions != null) {
+                        // Check if local and Firebase values differ
+                        if (firebaseEmissions != totalEmissions) {
+                            totalEmissions = firebaseEmissions; // Synchronize local variable
+                            totalEmissionsTextView.setText(String.format("%.2f", totalEmissions));
+                            Toast.makeText(EcoBalanceActivity.this, "Synchronized with Firebase data.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // No difference; just display the value
+                            totalEmissionsTextView.setText(String.format("%.2f", totalEmissions));
+                        }
+                    } else {
+                        Toast.makeText(EcoBalanceActivity.this, "Firebase data is null. Retaining local value.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(EcoBalanceActivity.this, "No data found in Firebase. Retaining local value.", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(EcoBalanceActivity.this, getString(R.string.error_fetching_data), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EcoBalanceActivity.this, "Failed to fetch data from Firebase: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -163,12 +179,12 @@ public class EcoBalanceActivity extends AppCompatActivity {
         String tonsInput = inputTons.getText().toString();
 
         if (selectedProject.isEmpty() || selectedProjectCost == 0) {
-            Toast.makeText(this, getString(R.string.error_select_project), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select a project.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (tonsInput.isEmpty()) {
-            Toast.makeText(this, getString(R.string.error_enter_tons), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter the number of tons to offset.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -176,18 +192,18 @@ public class EcoBalanceActivity extends AppCompatActivity {
         try {
             tons = Double.parseDouble(tonsInput);
             if (tons <= 0) {
-                Toast.makeText(this, getString(R.string.error_invalid_tons), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please enter a valid number of tons.", Toast.LENGTH_SHORT).show();
                 return;
             }
         } catch (NumberFormatException e) {
-            Toast.makeText(this, getString(R.string.error_invalid_format), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid number format!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         double totalCost = tons * selectedProjectCost;
 
         if (tons > totalEmissions) {
-            Toast.makeText(this, getString(R.string.error_exceeds_emissions), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Offset exceeds your total emissions.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -196,39 +212,17 @@ public class EcoBalanceActivity extends AppCompatActivity {
 
         // Confirm purchase
         new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.confirm_purchase_title))
-                .setMessage(String.format(Locale.getDefault(), getString(R.string.confirm_purchase_message), tons, totalCost))
-                .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
+                .setTitle("Confirm Purchase")
+                .setMessage(String.format("You are about to purchase offsets for %.2f tons of CO2e for $%.2f. Do you want to proceed?", tons, totalCost))
+                .setPositiveButton("Yes", (dialog, which) -> {
                     updateEmissionsAfterPurchase(tons);
                     purchaseButton.setEnabled(true);
+                    // Redirect to verification URL
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://planetze.io/"));
                     startActivity(browserIntent);
                 })
-                .setNegativeButton(getString(R.string.no), (dialog, which) -> purchaseButton.setEnabled(true))
+                .setNegativeButton("No", (dialog, which) -> purchaseButton.setEnabled(true))
                 .show();
-    }
-
-    private void updateEmissionsAfterPurchase(double tons) {
-        databaseReference.child("AnnualEmission").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Double currentEmissions = snapshot.getValue(Double.class);
-                double updatedEmissions = (currentEmissions != null ? currentEmissions : 0.0) - tons;
-
-                databaseReference.child("AnnualEmission").setValue(updatedEmissions)
-                        .addOnSuccessListener(aVoid -> {
-                            totalEmissions = updatedEmissions;
-                            totalEmissionsTextView.setText(String.format(Locale.getDefault(), "%.2f", totalEmissions));
-                            Toast.makeText(EcoBalanceActivity.this, getString(R.string.purchase_successful), Toast.LENGTH_LONG).show();
-                        })
-                        .addOnFailureListener(e -> Toast.makeText(EcoBalanceActivity.this, getString(R.string.error_update_emissions), Toast.LENGTH_SHORT).show());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(EcoBalanceActivity.this, getString(R.string.error_fetching_data), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
@@ -256,4 +250,34 @@ public class EcoBalanceActivity extends AppCompatActivity {
         }
     }
 
+
+    private void updateEmissionsAfterPurchase(double tons) {
+        // Fetch the latest value from Firebase before updating
+        databaseReference.child("AnnualEmission").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                double currentEmissions = snapshot.getValue(Double.class) != null ? snapshot.getValue(Double.class) : 0.0;
+
+                // Calculate the updated emissions
+                double updatedEmissions = currentEmissions - tons;
+
+                // Update Firebase
+                databaseReference.child("AnnualEmission").setValue(updatedEmissions)
+                        .addOnSuccessListener(aVoid -> {
+                            // Update local value and UI
+                            totalEmissions = updatedEmissions;
+                            totalEmissionsTextView.setText(String.format("%.2f", totalEmissions));
+                            Toast.makeText(EcoBalanceActivity.this, "Purchase Successful! Emissions updated.", Toast.LENGTH_LONG).show();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(EcoBalanceActivity.this, "Failed to update emissions data.", Toast.LENGTH_SHORT).show();
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(EcoBalanceActivity.this, "Failed to load current emissions data.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
