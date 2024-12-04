@@ -1,0 +1,49 @@
+answers,values
+MonthlyYes: regularly,180
+MonthlyYes: occasionally,252
+MonthlyNo,360
+QuarterlyYes: regularly,60
+QuarterlyYes occasionally,84
+QuarterlyNo,120
+AnnuallyYes: regularly,50
+AnnuallyYes: occasionally,70
+AnnuallyNo,100
+RarelyYes: regularly,2.5
+RarelyYes: occasionally,3.5
+RarelyNo,5
+NoneDevice,0
+1Device,300
+2Device,600
+3 or moreDevice,900
+MonthlyNever,0
+MonthlyOccasionally,54
+MonthlyFrequently,108
+MonthlyAlways,180
+QuarterlyNever,0
+QuarterlyOccasionally,0
+QuarterlyFrequently,0
+QuarterlyAlways,0
+AnnuallyNever,0
+AnnuallyOccasionally,15
+AnnuallyFrequently,30
+AnnuallyAlways,45
+RarelyNever,0
+RarelyOccasionally,15
+RarelyFrequently,30
+RarelyAlways,45
+NoneDeviceNever,0
+NoneDeviceOccasionally,0
+NoneDeviceFrequently,0
+NoneDeviceAlways,0
+1DeviceNever,0
+1DeviceOccasionally,45
+1DeviceFrequently,60
+1DeviceAlways,90
+2DeviceNever,0
+2DeviceOccasionally,60
+2DeviceFrequently,120
+2DeviceAlways,180
+3 or moreDeviceNever,0
+3 or moreDeviceOccasionally,90
+3 or moreDeviceFrequently,180
+3 or moreDeviceAlways,270

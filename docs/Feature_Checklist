@@ -1,0 +1,76 @@
+Features & Functionality
+
+Key Features
+[] Eco Tracker: Tracks users' carbon emissions from daily activities.
+[] Eco Gauge: Visual representation of progress toward carbon reduction goals.
+[] Eco Balance: Ability to offset carbon emissions.
+[] Eco Hub: Educational resources and sustainability tips.
+[] Eco Agent: AI-based chat interface for user interaction.
+
+User Flows
+[] Download & Open App: User downloads and opens the app.
+[] First-Time User Onboarding: Welcome and initial setup instructions.
+[] Introduction to Carbon Footprint Calculation: Briefly explain carbon footprint calculation process.
+[] Annual Carbon Footprint Calculation: User answers questions about lifestyle for carbon footprint calculation.
+[] Navigation to Main Menu: Direct users to Eco Tracker.
+[] Access to Other Menus: Provide navigation to Eco Gauge, Eco Balance, Eco Hub, and Eco Agent.
+
+Feature Breakdown
+
+[] User Registration
+  [] Access Registration: Welcome screen with options to log in or sign up.
+  [] Registration Screen: Input fields for full name, email, password, and confirm password.
+  [] Account Confirmation: Email confirmation and proceed with login.
+
+[] User Log In
+  [] Access Log In: Login screen for existing users.
+  [] Log In Screen: Email and password fields for login.
+  [] Authentication: Successful login redirects to the main dashboard.
+  [] Forgot Password: Link for users to reset their password.
+
+[] Annual Carbon Footprint Calculation
+  [] Ask for Location: Dropdown list to specify country.
+  [] Transportation Questions: Questions about vehicle use, public transport, and flights.
+  [] Food Consumption: Diet-related questions (e.g., meat-based or plant-based).
+  [] Housing: Questions about home type, energy sources, and monthly electricity bill.
+  [] Consumption: Questions about clothing, electronics, and recycling habits.
+
+[] Displaying Annual Carbon Footprint Results
+  [] Overview of Results: Display total annual carbon footprint.
+  [] Breakdown by Category: Show emissions breakdown by transportation, food, housing, and consumption.
+  [] Comparisons & Benchmarks: Compare to national and global averages.
+
+[] Eco Tracker
+  [] Carbon Emissions Monitoring
+    [] Daily Emissions: Track user emissions from activities like transportation, energy use, food consumption, etc.
+    [] Input Methods: Manual input for daily activities.
+    [] Activity List: Include transportation, food, consumption, and energy bills.
+    [] CO2e Calculation: Automatically calculate CO2e emissions based on inputs.
+  [] Calendar and Activity Management
+    [] Day Selection for Logging: Allow users to select a day for logging.
+    [] Activity Management: Options to edit or delete activities.
+  [] Habit Suggestions
+    [] Pre-Defined Habit List: Basic list of eco-friendly habits.
+    [] Habit Tracking: Track progress for selected habits.
+    [] Personalized Recommendations: Suggest habits based on user data.
+
+[] Eco Gauge
+  [] Total CO2e Emissions Overview: show total CO2e emissions over selected time periods (e.g., weekly, monthly).
+  [] Emissions Breakdown by Category: Display emissions breakdown using pie charts or bar graphs.
+  [] Emissions Trend Graph: Line graph to show emissions trends over time.
+  [] Comparison to Averages: Compare user emissions with global or national averages.
+
+[] Eco Balance
+  [] Offset Projects: Allow users to select and purchase carbon offsets from verified projects.
+  [] Explore Projects: Present offset projects with details like location, impact, and cost.
+
+[] Eco Hub
+  [] Learning Resources: Offer articles, videos, and insights on sustainability.
+  [] Market Trends: Include eco-friendly product highlights and information on green solutions.
+
+[] Eco Agent
+  [] AI Assistant: Help users navigate the app and provide carbon-reduction advice.
+  [] Offer Personalized Recommendations: Based on user data and behaviors.
+
+[] User Interface (UI) Requirements
+  [] Logo and Website: Display and link to the Planetze logo and website (planetze.io).
