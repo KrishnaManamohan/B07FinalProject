@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +56,7 @@ public class HabitActivity extends AppCompatActivity {
 
     private TextView habitField1, habitField2, habitField3;
     private TextView standingField1, standingField2, standingField3;
-    private Button deleteHabit1, deleteHabit2, deleteHabit3;
+    private ImageButton deleteHabit1, deleteHabit2, deleteHabit3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +124,7 @@ public class HabitActivity extends AppCompatActivity {
         Button btnFilter2 = findViewById(R.id.btnFilter2);
         Button btnFilter3 = findViewById(R.id.btnFilter3);
         Button btnShowAll = findViewById(R.id.btnShowAll);
-        Button btnAddHabit = findViewById(R.id.btnAddHabit);
+        ImageButton btnAddHabit = findViewById(R.id.btnAddHabit);
 
 
         btnFilter1.setOnClickListener(v -> updateDropdown(optionsFile1));
