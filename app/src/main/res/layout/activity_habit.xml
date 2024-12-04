@@ -1,0 +1,358 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/HabitPageConstraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <AutoCompleteTextView
+        android:id="@+id/dropdownMenu"
+        android:layout_width="245dp"
+        android:layout_height="54dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/habitHeader"
+        app:layout_constraintTop_toBottomOf="@+id/habitHeader" />
+
+    <Button
+        android:id="@+id/btnFilter2"
+        android:layout_width="115dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#1B1B1E"
+        android:text="Travel"
+        app:layout_constraintStart_toEndOf="@+id/btnFilter1"
+        app:layout_constraintTop_toBottomOf="@+id/dropdownMenu" />
+
+    <Button
+        android:id="@+id/btnFilter1"
+        android:layout_width="115dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#1B1B1E"
+        android:text="Spending"
+        app:layout_constraintStart_toStartOf="@+id/dropdownMenu"
+        app:layout_constraintTop_toBottomOf="@+id/dropdownMenu" />
+
+    <Button
+        android:id="@+id/btnFilter3"
+        android:layout_width="115dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#1B1B1E"
+        android:text="Food"
+        app:layout_constraintStart_toEndOf="@+id/btnFilter2"
+        app:layout_constraintTop_toBottomOf="@+id/dropdownMenu" />
+
+    <Button
+        android:id="@+id/btnShowAll"
+        android:layout_width="361dp"
+        android:layout_height="44dp"
+        android:backgroundTint="#1B1B1E"
+        android:text="Display all"
+        app:layout_constraintStart_toStartOf="@+id/btnFilter1"
+        app:layout_constraintTop_toBottomOf="@+id/btnFilter2" />
+
+    <TextView
+        android:id="@+id/habitHeader"
+        android:layout_width="243dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Search a Habit"
+        android:textAlignment="viewStart"
+        android:textColor="#1b1b1e"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/habitHeader2"
+        android:layout_width="257dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Filter Habits By Category"
+        android:textAlignment="viewStart"
+        android:textColor="#1b1b1e"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/dropdownMenu"
+        app:layout_constraintTop_toBottomOf="@+id/dropdownMenu" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="388dp"
+        android:layout_height="264dp"
+        android:layout_marginTop="63dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnShowAll"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/habitField3"
+            android:layout_width="175dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Habit 3"
+            android:textColor="#1b1b1e"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/habitField2" />
+
+        <TextView
+            android:id="@+id/standingField3"
+            android:layout_width="140dp"
+            android:layout_height="79dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Standing 3"
+            android:textColor="#1b1b1e"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/habitField3"
+            app:layout_constraintTop_toBottomOf="@+id/standingField2" />
+
+        <TextView
+            android:id="@+id/habitField2"
+            android:layout_width="175dp"
+            android:layout_height="81dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Habit 2"
+            android:textColor="#1b1b1e"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/habitField1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/standingField2" />
+
+        <TextView
+            android:id="@+id/standingField2"
+            android:layout_width="140dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Standing 2"
+            android:textColor="#1b1b1e"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/habitField2"
+            app:layout_constraintTop_toBottomOf="@+id/standingField1" />
+
+        <TextView
+            android:id="@+id/habitField1"
+            android:layout_width="172dp"
+            android:layout_height="78dp"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Habit 1"
+            android:textColor="#1b1b1e"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/standingField1" />
+
+        <TextView
+            android:id="@+id/standingField1"
+            android:layout_width="143dp"
+            android:layout_height="78dp"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Standing 1"
+            android:textColor="#1b1b1e"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/habitField1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/deleteHabit3"
+            android:layout_width="50dp"
+            android:layout_height="51dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.565"
+            app:layout_constraintStart_toEndOf="@+id/standingField3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.924"
+            app:tint="#1B1B1E" />
+
+        <ImageView
+            android:id="@+id/del3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/deleteHabit3"
+            app:layout_constraintEnd_toEndOf="@+id/deleteHabit3"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="@+id/deleteHabit3"
+            app:layout_constraintTop_toTopOf="@+id/deleteHabit3"
+            app:layout_constraintVertical_bias="0.476"
+            app:srcCompat="@drawable/delete" />
+
+        <ImageButton
+            android:id="@+id/deleteHabit2"
+            android:layout_width="49dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.583"
+            app:layout_constraintStart_toEndOf="@+id/standingField2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#1B1B1E" />
+
+        <ImageView
+            android:id="@+id/del2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/deleteHabit2"
+            app:layout_constraintEnd_toEndOf="@+id/deleteHabit2"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="@+id/deleteHabit2"
+            app:layout_constraintTop_toTopOf="@+id/deleteHabit2"
+            app:layout_constraintVertical_bias="0.476"
+            app:srcCompat="@drawable/delete" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="49dp"
+            android:layout_height="45dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/deleteHabit1"
+            app:layout_constraintEnd_toEndOf="@+id/deleteHabit1"
+            app:layout_constraintStart_toStartOf="@+id/deleteHabit1"
+            app:layout_constraintTop_toTopOf="@+id/deleteHabit1"
+            app:srcCompat="@drawable/delete" />
+
+        <ImageButton
+            android:id="@+id/deleteHabit1"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.583"
+            app:layout_constraintStart_toEndOf="@+id/standingField1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.074"
+            app:tint="#1B1B1E" />
+
+        <ImageView
+            android:id="@+id/del1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/deleteHabit1"
+            app:layout_constraintEnd_toEndOf="@+id/deleteHabit1"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="@+id/deleteHabit1"
+            app:layout_constraintTop_toTopOf="@+id/deleteHabit1"
+            app:layout_constraintVertical_bias="0.47000003"
+            app:srcCompat="@drawable/delete" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/backButtonHabit"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="169dp"
+        android:layout_marginBottom="70dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/back_button"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
+        app:tint="#1B1B1E" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="15dp"
+        android:layout_height="16dp"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@+id/backButtonHabit"
+        app:layout_constraintEnd_toEndOf="@+id/backButtonHabit"
+        app:layout_constraintStart_toStartOf="@+id/backButtonHabit"
+        app:layout_constraintTop_toTopOf="@+id/backButtonHabit" />
+
+    <ImageButton
+        android:id="@+id/btnAddHabit"
+        android:layout_width="98dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="5dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/back_button"
+        android:src="@drawable/circle"
+        app:layout_constraintStart_toEndOf="@+id/dropdownMenu"
+        app:layout_constraintTop_toBottomOf="@+id/habitHeader"
+        app:tint="#1B1B1E" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="42dp"
+        android:layout_height="45dp"
+        android:text="+"
+        android:textAlignment="center"
+        android:textColor="#d8dbe2"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAddHabit"
+        app:layout_constraintEnd_toEndOf="@+id/btnAddHabit"
+        app:layout_constraintStart_toStartOf="@+id/btnAddHabit"
+        app:layout_constraintTop_toTopOf="@+id/btnAddHabit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
