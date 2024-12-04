@@ -1,9 +1,11 @@
 package com.example.planetzeapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -70,6 +72,7 @@ public class EcoBalanceActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +114,14 @@ public class EcoBalanceActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, projectNames);
         projectDropdown.setAdapter(adapter);
 
+        // Show all project names when double-clicked
+        projectDropdown.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                projectDropdown.showDropDown();
+            }
+            return false;
+        });
+
         projectDropdown.setOnItemClickListener((parent, view, position, id) -> displayProjectDetails(position));
 
         inputTons.addTextChangedListener(new TextWatcher() {
@@ -127,11 +138,6 @@ public class EcoBalanceActivity extends AppCompatActivity {
         });
 
         purchaseButton.setOnClickListener(view -> handlePurchase());
-
-        findViewById(R.id.homePageButton).setOnClickListener(v -> {
-            Intent intent = new Intent(EcoBalanceActivity.this, HomePageActivity.class);
-            startActivity(intent);
-        });
     }
 
     private void fetchTotalEmissions() {
@@ -210,11 +216,15 @@ public class EcoBalanceActivity extends AppCompatActivity {
                 .setMessage(String.format("You are about to purchase offsets for %.2f tons of CO2e for $%.2f. Do you want to proceed?", tons, totalCost))
                 .setPositiveButton("Yes", (dialog, which) -> {
                     updateEmissionsAfterPurchase(tons);
-                    purchaseButton.setEnabled(true); // Re-enable after purchase
+                    purchaseButton.setEnabled(true);
+                    // Redirect to verification URL
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://planetze.io/"));
+                    startActivity(browserIntent);
                 })
-                .setNegativeButton("No", (dialog, which) -> purchaseButton.setEnabled(true)) // Re-enable if canceled
+                .setNegativeButton("No", (dialog, which) -> purchaseButton.setEnabled(true))
                 .show();
     }
+
 
 
     private void displayProjectDetails(int position) {
