@@ -1,0 +1,26 @@
+answer,values
+Never,0
+Occasionally (1-2 times/week)Under 1 hour,246
+Occasionally (1-2 times/week)1-3 hours,819
+Occasionally (1-2 times/week)3-5 hours,1638
+Occasionally (1-2 times/week)5-10 hours,3071
+Occasionally (1-2 times/week)More than 10 hours,4095
+Frequently (3-4 times/week)Under 1 hour,573
+Frequently (3-4 times/week)1-3 hours,1911
+Frequently (3-4 times/week)3-5 hours,3822
+Frequently (3-4 times/week)5-10 hours,7166
+Frequently (3-4 times/week)More than 10 hours,9555
+Always (5+ times/week)Under 1 hour,573
+Always (5+ times/week)1-3 hours,1911
+Always (5+ times/week)3-5 hours,3822
+Always (5+ times/week)5-10 hours,7166
+Always (5+ times/week)More than 10 hours,9555
+None,0
+1-2 flightsSHF,225
+3-5 flightsSHF,600
+6-10 flightsSHF,1200
+More than 10 flightsSHF,1800
+1-2 flightsLHF,825
+3-5 flightsLHF,2200
+6-10 flightsLHF,4400
+More than 10 flightsLHF,6600
