@@ -13,7 +13,6 @@ public abstract class CalculateHabits {
         Log.d("CalculateHabits", "calculateStanding method called for habit: " + habit);
 
         if (survey.isEmpty() || survey == null || habit == null || survey.size() == 1){
-            System.out.println("empty");
             return 0;
         }
 
@@ -35,19 +34,15 @@ public abstract class CalculateHabits {
         }
         if (habit.equals("Buy Less Electronics")){
             if (survey.get(survey.size()-1).get("11").equals("0")){
-                System.out.println("e1");
                 return 1;
             }
             if (Integer.parseInt(survey.get(survey.size()-1).get("11").substring(0,1)) < Integer.parseInt(survey.get(survey.size()-2).get("11").substring(0,1))){
-                System.out.println("e2");
                 return 1;
             }
             if (Integer.parseInt(survey.get(survey.size()-1).get("11").substring(0,1)) == Integer.parseInt(survey.get(survey.size()-2).get("11").substring(0,1))){
-                System.out.println("e4");
                 return 0;
             }
             if (Integer.parseInt(survey.get(survey.size()-1).get("11").substring(0,1)) > Integer.parseInt(survey.get(survey.size()-2).get("11").substring(0,1))){
-                System.out.println("e5");
                 return -1;
             }
 

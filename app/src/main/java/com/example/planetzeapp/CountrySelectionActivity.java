@@ -28,7 +28,7 @@ public class CountrySelectionActivity extends AppCompatActivity {
     private Button surveyButton;
     private AutoCompleteTextView countryDropdown;
     private DatabaseReference databaseReference;
-    private String userId = null; // Firebase Auth UID
+    private String userId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,44 +36,34 @@ public class CountrySelectionActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_country_selection);
 
-        // Adjust for system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Initialize Firebase Auth and check user
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser != null) {
-            userId = currentUser.getUid(); // Get the logged-in user's UID
+            userId = currentUser.getUid();
         } else {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Initialize views
         countryDropdown = findViewById(R.id.countryField);
         surveyButton = findViewById(R.id.surveyButton);
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
-        // Check if user already has a country set
         checkExistingCountry();
-
-        // Set survey button action
         surveyButton.setOnClickListener(v -> confirmCountrySelection());
-
-        // Load countries from CSV and set to dropdown
         loadCountriesFromCSV();
     }
 
     private void checkExistingCountry() {
-        // Check if the user already has a country selected
         databaseReference.child(userId).child("country").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (task.getResult().exists()) {
-                    // If country exists, skip to SurveyActivity
                     startSurveyActivity();
                 }
             } else {
@@ -84,21 +74,17 @@ public class CountrySelectionActivity extends AppCompatActivity {
 
     private void confirmCountrySelection() {
         String selectedCountry = countryDropdown.getText().toString().trim();
-
         if (selectedCountry.isEmpty()) {
             Toast.makeText(this, "Please select a country", Toast.LENGTH_SHORT).show();
             return;
         }
-
         saveCountryToFirebase(selectedCountry);
     }
 
     private void saveCountryToFirebase(String selectedCountry) {
-        // Save selected country to Firebase under the logged-in user's UID
         databaseReference.child(userId).child("country").setValue(selectedCountry)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Proceed to SurveyActivity
                         startSurveyActivity();
                     } else {
                         Toast.makeText(CountrySelectionActivity.this, "Failed to save country", Toast.LENGTH_SHORT).show();
@@ -107,7 +93,6 @@ public class CountrySelectionActivity extends AppCompatActivity {
     }
 
     private void startSurveyActivity() {
-        // Navigate to SurveyActivity
         Intent intent = new Intent(CountrySelectionActivity.this, SurveyActivity.class);
         startActivity(intent);
         finish();
@@ -116,12 +101,8 @@ public class CountrySelectionActivity extends AppCompatActivity {
     private void loadCountriesFromCSV() {
         try {
             List<String> countries = loadCountriesFromAssets();
-
-            // Set up AutoCompleteTextView with the countries
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, countries);
             countryDropdown.setAdapter(adapter);
-
-            // Show dropdown when the field is clicked or gains focus
             countryDropdown.setOnClickListener(v -> countryDropdown.showDropDown());
             countryDropdown.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {

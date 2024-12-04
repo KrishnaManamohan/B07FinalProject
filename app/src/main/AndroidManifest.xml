@@ -23,9 +23,6 @@
             android:name=".CountrySelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".EcoTrackerActivity"
-            android:exported="false" />
-        <activity
             android:name=".CompleteRegistrationActivity"
             android:exported="false" />
         <activity

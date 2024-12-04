@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +71,6 @@ public class HabitActivity extends AppCompatActivity {
         dropdownMenu.setThreshold(0);
         dropdownMenu.setOnClickListener(v -> dropdownMenu.showDropDown());
 
-        // Find the habit fields and delete buttons
         habitField1 = findViewById(R.id.habitField1);
         habitField2 = findViewById(R.id.habitField2);
         habitField3 = findViewById(R.id.habitField3);
@@ -93,16 +93,12 @@ public class HabitActivity extends AppCompatActivity {
         RecentDayFetcher.fetchLast7Days(userId, new RecentDayFetcher.FetchCallback() {
             @Override
             public void onDataFetched(ArrayList<Float> emissions, Map<String, Map<String, String>> surveyAnswers) {
-                // Handle the emissions data
                 Log.d("Emissions", "Emissions Data: " + emissions);
-
-                // Handle the survey answers
                 Log.d("Survey Answers", "Survey Answers: " + surveyAnswers);
             }
 
             @Override
             public void onError(String errorMessage) {
-                // Handle the error
                 Log.e("Error", errorMessage);
             }
         });
@@ -110,8 +106,7 @@ public class HabitActivity extends AppCompatActivity {
 
         last7DaysSurveys = RecentDayFetcher.getLast7DaysSurveys();
         surveyDataList = new ArrayList<>(last7DaysSurveys.values());
-
-        printLast7DaysSurveys(last7DaysSurveys);
+        Collections.reverse(surveyDataList);
 
         loadCsvFiles();
 
@@ -250,7 +245,6 @@ public class HabitActivity extends AppCompatActivity {
     }
 
     private void displayHabits() {
-        // Reset the habit fields and standing fields
         habitField1.setText("Add Habit");
         habitField2.setText("Add Habit");
         habitField3.setText("Add Habit");
@@ -283,44 +277,18 @@ public class HabitActivity extends AppCompatActivity {
     private void deleteHabit(String habitName) {
         habitsMap.remove(habitName);
         updateHabitsInFirebase();
-        displayHabits();  // Re-load the habits after deletion
+        displayHabits();
     }
-
 
     private void updateHabitsInFirebase() {
         Map<String, Integer> orderedHabits = new LinkedHashMap<>(habitsMap);
         databaseReference.setValue(orderedHabits).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(HabitActivity.this, "Habit added successfully", Toast.LENGTH_SHORT).show();
-                displayHabits();  // Re-load the habits
+                displayHabits();
             } else {
                 Toast.makeText(HabitActivity.this, "Error adding habit", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public static void printLast7DaysSurveys(Map<String, Map<String, String>> last7DaysSurveys) {
-        if (last7DaysSurveys == null || last7DaysSurveys.isEmpty()) {
-            System.out.println("No survey data available.");
-            return;
-        }
-
-        // Iterate over the outer map (the dates)
-        for (Map.Entry<String, Map<String, String>> entry : last7DaysSurveys.entrySet()) {
-            String date = entry.getKey();
-            Map<String, String> surveyData = entry.getValue();
-
-            // Print the date (key of the outer map)
-            System.out.println("Date: " + date);
-
-            // Iterate over the inner map (the habit data for the given date)
-            for (Map.Entry<String, String> habitEntry : surveyData.entrySet()) {
-                String habit = habitEntry.getKey();
-                String status = habitEntry.getValue();
-
-                // Print the habit and its status
-                System.out.println("  Habit: " + habit + " - Status: " + status);
-            }
-        }
     }
 }

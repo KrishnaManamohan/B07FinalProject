@@ -9,15 +9,12 @@ import java.util.Map;
 
 public class EmissionCalculator {
 
-    // Store multipliers as a map (answer -> multiplier)
     private static Map<String, Double> formulaMap = new HashMap<>();
     private static double totalAnnualEmissions = 0;
     private static double transportationAnnualEmissions = 0;
     private static double foodAnnualEmissions = 0;
     private static double housingAnnualEmissions = 0;
     private static double consumptionAnnualEmissions = 0;
-
-    // Define an array of CSV file names
     private static final String[] FORMULA_CSV_FILES = {
             "dailyFormulas.csv",
             "HousingFormula.csv",
@@ -26,26 +23,23 @@ public class EmissionCalculator {
             "consumptionEmission.csv"
     };
 
-    // Initialize multipliers from the given CSV files
     public static void loadMultipliers(Context context) {
         if (!formulaMap.isEmpty()){
             return;
         }
 
         try {
-            // Loop through all the CSV files
             for (String csvFileName : FORMULA_CSV_FILES) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(context.getAssets().open(csvFileName)));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    // Skip header line if present
                     if (line.startsWith("answer")) continue;
 
                     String[] parts = line.split(",");
                     String answer = parts[0].trim();
                     double value = Double.parseDouble(parts[1].trim());
 
-                    formulaMap.put(answer, value); // Map the answer to its multiplier
+                    formulaMap.put(answer, value);
                 }
                 reader.close();
             }
@@ -127,12 +121,24 @@ public class EmissionCalculator {
 
         double totalEmissions = 0;
 
-        if (surveyAnswers.get(3).equals("Never") || surveyAnswers.get(5).equals("None") || surveyAnswers.get(6).equals("None")){
+        if (surveyAnswers.get(3).equals("Never")) {
+
+        }
+        else{
+            totalEmissions += formulaMap.get(surveyAnswers.get(3) + surveyAnswers.get(4));
+
+        }
+        if (surveyAnswers.get(5).equals("None")){
 
         }
         else {
-            totalEmissions += formulaMap.get(surveyAnswers.get(3) + surveyAnswers.get(4));
             totalEmissions += formulaMap.get(surveyAnswers.get(5) + "SHF");
+        }
+
+        if (surveyAnswers.get(6).equals("None")){
+
+        }
+        else {
             totalEmissions += formulaMap.get(surveyAnswers.get(6) + "LHF");
         }
 
@@ -167,19 +173,17 @@ public class EmissionCalculator {
             totalEmission += kilometers*formulaMap.get(surveyAnswers.get(1));
         }
         else{
-            totalEmission += kilometers*.25; //average
+            totalEmission += kilometers*.25;
         }
 
         return totalEmission;
     }
 
-    // Calculate the daily emission based on the selections and survey answers
     public static double calculateDailyEmission(String[] selections, String[] surveyAnswers, Context context) {
         if (surveyAnswers == null) {
             return 0.0;
         }
 
-        // Load multipliers from the available CSV files
         loadMultipliers(context);
 
         int kilometers = 0;
@@ -232,15 +236,6 @@ public class EmissionCalculator {
         return totalEmission + housingEmission;
     }
 
-    // Parse the selection string to get an integer value (unchanged from your existing code)
-    private static int parseOption(String selection) {
-        try {
-            return Integer.parseInt(selection.split(" ")[0]);
-        } catch (NumberFormatException e) {
-            return 0;
-        }
-    }
-
     public static double getAnnualEmissions() {
         return totalAnnualEmissions;
     }
@@ -257,9 +252,3 @@ public class EmissionCalculator {
         return housingAnnualEmissions;
     }
 }
-
-
-
-
-
-

@@ -13,9 +13,7 @@ public class FetchUserEmissionData {
     public static double purchasesEmission = 0.0;
     public static double annualEmission = 0.0;
 
-    // New method with a callback
     public static void fetchEmissionData(String userId, EmissionDataCallback callback) {
-        // Fetch emission data asynchronously from Firebase
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(userId);
 
         ref.child("EnergyAnnualEmission").get().addOnCompleteListener(task -> {
@@ -34,10 +32,8 @@ public class FetchUserEmissionData {
                         if (task4.isSuccessful()) {
                             purchasesEmission = task4.getResult().getValue(Double.class);
                         }
-                        // Calculate the total annual emission once all data is fetched
                         annualEmission = energyEmission + transportationEmission + foodEmission + purchasesEmission;
 
-                        // Call the callback to notify that data is ready
                         callback.onDataFetched(annualEmission);
                     });
                 });
@@ -45,7 +41,6 @@ public class FetchUserEmissionData {
         });
     }
 
-    // Callback interface to notify when data is fetched
     public interface EmissionDataCallback {
         void onDataFetched(double annualEmission);
     }

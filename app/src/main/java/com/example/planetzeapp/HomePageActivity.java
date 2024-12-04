@@ -70,22 +70,18 @@ public class HomePageActivity extends AppCompatActivity {
                         String fullName = snapshot.getValue(String.class);
                         userdisplay = findViewById(R.id.usertxt);
                         String[] name1 = fullName.split(" ");
-                        userdisplay.setText(name1[0]);  // Display user's first name
+                        userdisplay.setText(name1[0]);
                     }
                 }
             });
 
-            // Retrieve user ID from FirebaseAuth
             userId = FirebaseAuth.getInstance().getUid();
             if (userId == null) {
                 Toast.makeText(this, "Error: User not logged in!", Toast.LENGTH_SHORT).show();
             } else {
-                // Fetch survey answers when user ID is available
                 SurveyAnswerFetcher.fetchSurveyAnswers(userId);
 
-                // Fetch and display emission data
                 FetchUserEmissionData.fetchEmissionData(userId, annualEmission -> {
-                    // Callback to update UI with the fetched annual emission value
                     this.annualEmission = annualEmission;
                     update(txtcounter);
                 });
@@ -93,42 +89,28 @@ public class HomePageActivity extends AppCompatActivity {
             RecentDayFetcher.fetchLast7Days(userId, new RecentDayFetcher.FetchCallback() {
                 @Override
                 public void onDataFetched(ArrayList<Float> emissions, Map<String, Map<String, String>> surveyAnswers) {
-                    // Handle the emissions data
                     Log.d("Emissions", "Emissions Data: " + emissions);
-
-                    // Handle the survey answers
                     Log.d("Survey Answers", "Survey Answers: " + surveyAnswers);
                 }
 
                 @Override
                 public void onError(String errorMessage) {
-                    // Handle the error
                     Log.e("Error", errorMessage);
                 }
             });
 
-
-            // Fetch and display emission data
             FetchUserEmissionData.fetchEmissionData(userId, annualEmission -> {
-                // Callback to update UI with the fetched annual emission value
                 this.annualEmission = annualEmission;
                 update(txtcounter);
             });
 
-            // Handle logout
             logoutButton = findViewById(R.id.logoutbutton);
             logoutButton.setOnClickListener(v -> logout());
 
-            // Redirect to EcoGaugeActivity
             findViewById(R.id.ecoGaugeButton).setOnClickListener(v -> {
                 Intent intent = new Intent(HomePageActivity.this, EcoGaugeActivity.class);
                 startActivity(intent);
             });
-
-//            findViewById(R.id.ecoTrackerButton2).setOnClickListener(v -> {
-//                Intent intent = new Intent(HomePageActivity.this, EcoTrackerActivity.class);
-//                startActivity(intent);
-//            });
 
             findViewById(R.id.ecoBalenceButton).setOnClickListener(v -> {
                 Intent intent = new Intent(HomePageActivity.this, EcoBalanceActivity.class);
@@ -137,18 +119,8 @@ public class HomePageActivity extends AppCompatActivity {
         }
     }
 
-    private void updateRecentEmissionsUI(ArrayList<Float> emissions) {
-        // Example: Display the emissions or update a chart
-        StringBuilder emissionsDisplay = new StringBuilder("Last 7 Days Emissions:\n");
-        for (int i = 0; i < emissions.size(); i++) {
-            emissionsDisplay.append("Day ").append(i + 1).append(": ").append(emissions.get(i)).append(" kg\n");
-        }
-        txtcounter.setText(emissionsDisplay.toString()); // Update a TextView with the fetched data
-    }
-
     private void update(TextView a) {
-        // Update the TextView with the annual emission value
-        a.setText(String.valueOf(annualEmission));  // Display the fetched emission data
+        a.setText(String.valueOf(annualEmission));
     }
 
     private void logout() {
@@ -159,8 +131,4 @@ public class HomePageActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-
 }
-
-

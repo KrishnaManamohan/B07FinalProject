@@ -30,6 +30,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -53,16 +55,12 @@ public class EcoGaugeActivity extends AppCompatActivity {
         RecentDayFetcher.fetchLast7Days(user.getUid(), new RecentDayFetcher.FetchCallback() {
             @Override
             public void onDataFetched(ArrayList<Float> emissions, Map<String, Map<String, String>> surveyAnswers) {
-                // Handle the emissions data
                 Log.d("Emissions", "Emissions Data: " + emissions);
-
-                // Handle the survey answers
                 Log.d("Survey Answers", "Survey Answers: " + surveyAnswers);
             }
 
             @Override
             public void onError(String errorMessage) {
-                // Handle the error
                 Log.e("Error", errorMessage);
             }
         });
@@ -73,48 +71,40 @@ public class EcoGaugeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
-        // Initialize views
         pieChart = findViewById(R.id.pieChart);
         lineChart = findViewById(R.id.lineChart);
         tvTotalEmissions = findViewById(R.id.tvTotalEmissions);
 
-        // Display total emissions (from FetchUserEmissionData, assuming it's static or calculated)
         tvTotalEmissions.setText("Annual CO2 Emissions: " + FetchUserEmissionData.annualEmission + " kg");
 
-        // Set up pie chart (with static data from FetchUserEmissionData)
         setupPieChart();
-        setupLineChart(lineChart, RecentDayFetcher.getLast7DaysEmissions());
-
+        ArrayList<Float> lineData = RecentDayFetcher.getLast7DaysEmissions();
+        Collections.reverse(lineData);
+        setupLineChart(lineChart, lineData);
     }
 
     private void setupPieChart() {
-        // Example data for the pie chart
         ArrayList<PieEntry> entries = new ArrayList<>();
         entries.add(new PieEntry((float) FetchUserEmissionData.transportationEmission, "Transportation"));
         entries.add(new PieEntry((float) FetchUserEmissionData.foodEmission, "Food"));
         entries.add(new PieEntry((float) FetchUserEmissionData.purchasesEmission, "Purchases"));
         entries.add(new PieEntry((float) FetchUserEmissionData.energyEmission, "Energy"));
 
-        // Set up the dataset and colors
         int[] blackAndWhiteColors = {
                 Color.BLACK,
-                Color.DKGRAY,  // Dark gray
-                Color.GRAY,    // Medium gray
-                Color.LTGRAY,  // Light gray
+                Color.DKGRAY,
+                Color.GRAY,
+                Color.LTGRAY,
                 Color.WHITE
         };
 
-// Apply the custom colors to your dataset
         PieDataSet dataSet = new PieDataSet(entries, "CO2 Emissions");
         dataSet.setColors(blackAndWhiteColors);
         dataSet.setValueTextSize(16f);
         dataSet.setValueTextColor(android.graphics.Color.WHITE);
 
-        // Set up pie data
         PieData pieData = new PieData(dataSet);
 
-        // Configure PieChart
         pieChart.setData(pieData);
         pieChart.setUsePercentValues(false);
         pieChart.getDescription().setEnabled(false);
@@ -123,7 +113,6 @@ public class EcoGaugeActivity extends AppCompatActivity {
         pieChart.setHoleRadius(40f);
         pieChart.setTransparentCircleRadius(45f);
 
-        // Refresh chart
         pieChart.invalidate();
     }
 
@@ -135,27 +124,23 @@ public class EcoGaugeActivity extends AppCompatActivity {
         }
         ArrayList<Entry> entries = new ArrayList<>();
 
-        // Populate data entries
         for (int i = 0; i < emissions.size(); i++) {
-            entries.add(new Entry(i + 1, emissions.get(i))); // Day i+1, emission value
+            entries.add(new Entry(i + 1, emissions.get(i)));
         }
 
-        // Create a dataset
         LineDataSet dataSet = new LineDataSet(entries, "Daily Emissions");
-        dataSet.setColor(Color.parseColor("#009999")); // Line color
-        dataSet.setValueTextColor(Color.parseColor("#1b1b1e")); // Text color
+        dataSet.setColor(Color.parseColor("#009999"));
+        dataSet.setValueTextColor(Color.parseColor("#1b1b1e"));
         dataSet.setLineWidth(2f);
         dataSet.setCircleRadius(4f);
 
-        // Create a LineData object and set it to the chart
         LineData lineData = new LineData(dataSet);
         lineChart.setData(lineData);
 
-        // Customize the chart
         lineChart.getDescription().setText("Last 7 Days Emissions");
         lineChart.getDescription().setTextSize(15f);
-        lineChart.animateX(1000); // Animation for X-axis
-        lineChart.invalidate(); // Refresh the chart
+        lineChart.animateX(1000);
+        lineChart.invalidate();
 
         lineChart.invalidate();
     }

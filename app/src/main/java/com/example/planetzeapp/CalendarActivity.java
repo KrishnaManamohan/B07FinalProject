@@ -31,15 +31,12 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-
         initializeUI();
 
-        // Retrieve user ID from FirebaseAuth, in case didnt happen before in HomePage
         userId = FirebaseAuth.getInstance().getUid();
         if (userId == null) {
             Toast.makeText(this, "Error: User not logged in!", Toast.LENGTH_SHORT).show();
         } else {
-            // Fetch survey answers when user ID is available
             SurveyAnswerFetcher.fetchSurveyAnswers(userId);
         }
     }
@@ -102,7 +99,6 @@ public class CalendarActivity extends AppCompatActivity {
             case 10: spinner = q11; break;
         }
 
-        // Find the position of the answer in the spinner's adapter data
         ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinner.getAdapter();
         int position = adapter.getPosition(answer);
         if (position >= 0) {
@@ -122,11 +118,9 @@ public class CalendarActivity extends AppCompatActivity {
         Calendar now = Calendar.getInstance();
         DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
                 (view, year, monthOfYear, dayOfMonth) -> {
-                    // Format the date so that the year, month, and day appear on separate lines
                     String formattedDate = "Day: " + dayOfMonth + "\nMonth: " + (monthOfYear + 1) + "\nYear: " + year;
                     selectedDateText.setText(formattedDate);
 
-                    // Retrieve the formatted date (e.g., "2024-11-29") and load the data from Firebase
                     String formattedDateForFirebase = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                     loadDataFromFirebase(formattedDateForFirebase);
                 },
@@ -138,26 +132,21 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     private void loadDataFromFirebase(String dateKey) {
-        // Check if the user is logged in
         String userId = FirebaseAuth.getInstance().getUid();
         if (userId == null) {
             Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Reference to the Firebase database
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users")
                 .child(userId)
                 .child("DailySurvey")
                 .child(dateKey);
 
-        // Fetch the data for the selected date
         databaseReference.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // If data exists, populate the spinners
                 Map<String, Object> data = (Map<String, Object>) task.getResult().getValue();
                 if (data != null) {
-                    // Populate the spinners with the stored data
                     for (int i = 0; i < 11; i++) {
                         String key = "" + (i + 1);
                         if (data.containsKey(key)) {
@@ -165,11 +154,9 @@ public class CalendarActivity extends AppCompatActivity {
                             setSpinnerSelection(i, answer);
                         }
                     }
-                    // Optionally, update the daily emission if needed
                     String dailyEmission = data.get("dailyEmission").toString();
                     dailyScore.setText(dailyEmission + " kg");
 
-                    // Do something with dailyEmission if needed
                 } else {
                     Toast.makeText(CalendarActivity.this, "No data found for the selected date.", Toast.LENGTH_SHORT).show();
                     q1.setSelection(0);
@@ -206,7 +193,6 @@ public class CalendarActivity extends AppCompatActivity {
             return;
         }
 
-        // Get and format the date
         String formattedDate = selectedDateText.getText().toString().replace("Selected Date: ", "").trim();
         String[] dateParts = formattedDate.split("\n");
         String day = dateParts[0].split(": ")[1];
@@ -214,34 +200,28 @@ public class CalendarActivity extends AppCompatActivity {
         String year = dateParts[2].split(": ")[1];
         String firebaseDateKey = year + "-" + month + "-" + day;
 
-        // Get Firebase user ID
         String userId = FirebaseAuth.getInstance().getUid();
         if (userId == null) {
             Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Build Firebase reference
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users")
                 .child(userId)
                 .child("DailySurvey")
                 .child(firebaseDateKey);
 
-        // Retrieve spinner selections
         String[] selections = getSpinnerSelections();
         String[] surveyAnswers = SurveyAnswerFetcher.getAnnualAnswers();
         double dailyEmission = EmissionCalculator.calculateDailyEmission(selections, surveyAnswers, this);
 
-        // Prepare data to save
-        Map<String, Object> dailySurveyData = new LinkedHashMap<>();  // Use LinkedHashMap for correct order
+        Map<String, Object> dailySurveyData = new LinkedHashMap<>();
         dailySurveyData.put("dailyEmission", dailyEmission);
 
-        // Add spinner selections to the map in the correct order
         for (int i = 0; i < selections.length; i++) {
             dailySurveyData.put("" + (i + 1), selections[i]);
         }
 
-        // Save to Firebase
         databaseReference.setValue(dailySurveyData).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
@@ -251,13 +231,5 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
         dailyScore.setText(dailyEmission + " kg");
-
     }
-
-
 }
-
-
-
-
-

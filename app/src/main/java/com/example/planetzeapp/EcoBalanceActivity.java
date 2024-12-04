@@ -81,20 +81,15 @@ public class EcoBalanceActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        // Check if the user is logged in
         if (user == null) {
             Toast.makeText(this, "Error: User not logged in!", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        // Get UID
         String uid = user.getUid();
-
-        // Firebase setup
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(uid);
 
-        // Initialize views
         projectDropdown = findViewById(R.id.projectDropdown);
         inputTons = findViewById(R.id.inputTons);
         projectDescription = findViewById(R.id.projectDescription);
@@ -102,10 +97,8 @@ public class EcoBalanceActivity extends AppCompatActivity {
         totalEmissionsTextView = findViewById(R.id.totalEmissionsTextView);
         purchaseButton = findViewById(R.id.purchaseButton);
 
-        // Synchronize local variable with Firebase data
         fetchTotalEmissions();
 
-        // Setup dropdown for project selection
         String[] projectNames = new String[projectDetails.length];
         for (int i = 0; i < projectDetails.length; i++) {
             projectNames[i] = projectDetails[i][0];
@@ -114,7 +107,6 @@ public class EcoBalanceActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, projectNames);
         projectDropdown.setAdapter(adapter);
 
-        // Show all project names when double-clicked
         projectDropdown.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 projectDropdown.showDropDown();
@@ -146,7 +138,6 @@ public class EcoBalanceActivity extends AppCompatActivity {
     }
 
     private void fetchTotalEmissions() {
-        // Display loading state while fetching data
         totalEmissionsTextView.setText("Loading...");
 
         databaseReference.child("AnnualEmission").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -155,13 +146,11 @@ public class EcoBalanceActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     Double firebaseEmissions = snapshot.getValue(Double.class);
                     if (firebaseEmissions != null) {
-                        // Check if local and Firebase values differ
                         if (firebaseEmissions != totalEmissions) {
                             totalEmissions = firebaseEmissions; // Synchronize local variable
                             totalEmissionsTextView.setText(String.format("%.2f", totalEmissions));
                             Toast.makeText(EcoBalanceActivity.this, "Synchronized with Firebase data.", Toast.LENGTH_SHORT).show();
                         } else {
-                            // No difference; just display the value
                             totalEmissionsTextView.setText(String.format("%.2f", totalEmissions));
                         }
                     } else {
@@ -212,10 +201,8 @@ public class EcoBalanceActivity extends AppCompatActivity {
             return;
         }
 
-        // Disable the button to prevent multiple clicks
         purchaseButton.setEnabled(false);
 
-        // Confirm purchase
         new AlertDialog.Builder(this)
                 .setTitle("Confirm Purchase")
                 .setMessage(String.format("You are about to purchase offsets for %.2f tons of CO2e for $%.2f. Do you want to proceed?", tons, totalCost))
@@ -257,19 +244,15 @@ public class EcoBalanceActivity extends AppCompatActivity {
 
 
     private void updateEmissionsAfterPurchase(double tons) {
-        // Fetch the latest value from Firebase before updating
         databaseReference.child("AnnualEmission").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 double currentEmissions = snapshot.getValue(Double.class) != null ? snapshot.getValue(Double.class) : 0.0;
 
-                // Calculate the updated emissions
                 double updatedEmissions = currentEmissions - tons;
 
-                // Update Firebase
                 databaseReference.child("AnnualEmission").setValue(updatedEmissions)
                         .addOnSuccessListener(aVoid -> {
-                            // Update local value and UI
                             totalEmissions = updatedEmissions;
                             totalEmissionsTextView.setText(String.format("%.2f", totalEmissions));
                             Toast.makeText(EcoBalanceActivity.this, "Purchase Successful! Emissions updated.", Toast.LENGTH_LONG).show();

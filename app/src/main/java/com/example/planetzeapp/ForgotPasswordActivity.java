@@ -44,19 +44,15 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private void sendResetLink() {
         String email = emailEditText.getText().toString().trim();
 
-        // Check if email is empty
         if (email.isEmpty()) {
             Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Send password reset email using Firebase
         firebaseAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Email sent successfully
                         Toast.makeText(this, "Password reset email sent. Check your inbox.", Toast.LENGTH_SHORT).show();
                     } else {
-                        // Handle error
                         String errorMessage = task.getException() != null ? task.getException().getMessage() : "Failed to send email.";
                         Toast.makeText(this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
                     }
@@ -65,5 +61,4 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
         startActivity(intent);
     }
-
 }
