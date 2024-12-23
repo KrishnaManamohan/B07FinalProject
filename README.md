@@ -12,7 +12,7 @@
 - **Real-Time Carbon Footprint Tracking**: Calculate emissions instantly.  
 - **Visual Dashboards**: Intuitive graphs and data visualizations.  
 - **Comparisons to Regional Averages**: Understand your carbon impact relative to others.  
-- Optional:  
+- Extras:  
   - **Eco Balance**: (Extra Credit) Track your progress in reducing emissions over time.  
   - **Eco Hub**: (Extra Credit) Connect with resources for sustainable practices.  
 
